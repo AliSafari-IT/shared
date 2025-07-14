@@ -46,5 +46,14 @@
     "utilities",
     "asafarim",
     "shared"
-  ]
+  ],
+  "license": "MIT",
+  "author": "Ali Safari",
+  "bugs": {
+    "url": "https://github.com/AliSafari-IT/shared/issues"
+  },
+  "homepage": "https://github.com/AliSafari-IT/shared#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
