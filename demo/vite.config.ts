@@ -10,7 +10,7 @@ const __dirname = path.dirname(__filename);
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '.',
+  base: process.env.NODE_ENV === 'production' ? '/shared/' : '/',
   resolve: {
     alias: {
       '@asafarim/shared': path.resolve(__dirname, '../src'),
@@ -19,5 +19,10 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     assetsDir: 'assets',
+    emptyOutDir: true,
   },
+  server: {
+    port: 5173,
+    strictPort: true,
+  }
 })
