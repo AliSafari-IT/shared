@@ -2,14 +2,14 @@ import React from 'react';
 
 const styles = {
   packageLinks: {
-    margin: '20px 0',
+    margin: 'var(--theme-spacing-lg, 20px) 0',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
   },
   linksContainer: {
     display: 'flex',
-    gap: '20px',
+    gap: 'var(--theme-spacing-lg, 20px)',
     flexWrap: 'wrap' as const,
     justifyContent: 'center',
   },
@@ -17,21 +17,33 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     textDecoration: 'none',
-    color: '#4dabf7',
+    color: 'var(--theme-color-primary, #4dabf7)',
     fontWeight: 500,
-    padding: '8px 16px',
-    borderRadius: '4px',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    transition: 'background-color 0.2s, transform 0.2s',
+    padding: 'var(--theme-spacing-sm, 8px) var(--theme-spacing-md, 16px)',
+    borderRadius: 'var(--theme-radius-md, 8px)',
+    backgroundColor: 'var(--theme-color-background-secondary, rgba(255, 255, 255, 0.1))',
+    transition: 'all var(--theme-transition-normal, 0.2s ease)',
+    border: '1px solid var(--theme-color-border, transparent)',
   },
   linkItemHover: {
-    backgroundColor: 'rgba(255, 255, 255, 0.15)',
+    backgroundColor: 'var(--theme-color-primary-hover, rgba(255, 255, 255, 0.15))',
     transform: 'translateY(-2px)',
+    borderColor: 'var(--theme-color-primary, #4dabf7)',
   },
   svg: {
-    marginRight: '8px',
+    marginRight: 'var(--theme-spacing-sm, 8px)',
+    fill: 'currentColor',
   },
-  // Dark theme styles can be applied conditionally based on a theme prop
+  // Responsive styles for mobile
+  '@media (max-width: 768px)': {
+    linksContainer: {
+      gap: 'var(--theme-spacing-md, 12px)',
+    },
+    linkItem: {
+      padding: 'var(--theme-spacing-xs, 6px) var(--theme-spacing-sm, 12px)',
+      fontSize: 'var(--theme-font-size-sm, 0.875rem)',
+    },
+  },
 };
 
 export interface PackageLinksProps {
