@@ -1,5 +1,5 @@
 {
-  "name": "@asafarim/shared-demo",
+  "name": "shared-demo",
   "version": "1.0.0",
   "description": "Demo application showcasing @asafarim/shared components",
   "private": true,
