@@ -1,56 +1,42 @@
-import { useTheme, ThemeSelector } from '@asafarim/react-themes';
+import { useTheme, ThemeSelector } from "@asafarim/react-themes";
 
 export default function Overview() {
   const { mode, currentTheme } = useTheme();
 
   return (
-    <div className="demo-section">
-      <h2 className="demo-title">Welcome to @asafarim/shared</h2>
-      <div className="demo-description">
-        <p>
-          This is a collection of reusable React components and utilities designed for ASafariM web applications.
-          Each component is built with TypeScript and follows modern React best practices.
-        </p>
-        <p>
-          Navigate through the menu above to explore individual components and see live examples with code snippets.
-          The demo uses <strong>@asafarim/react-themes</strong> for automatic dark/light mode switching and responsive design.
-        </p>
+    <div>
+      <div className="demo-section">
+        <h2 className="demo-title">Welcome to @asafarim/shared</h2>
+        <div className="demo-description">
+          <p>
+            This is a collection of reusable React components and utilities
+            designed for ASafariM web applications. Each component is built with
+            TypeScript and follows modern React best practices.
+          </p>
+          <p>
+            Navigate through the menu above to explore individual components and
+            see live examples with code snippets. The demo uses{" "}
+            <strong>@asafarim/react-themes</strong> for automatic dark/light
+            mode switching and responsive design.
+          </p>
+        </div>
       </div>
 
       <div className="demo-section">
         <h3 className="demo-title">🎨 Theme System Demo</h3>
         <div className="demo-description">
           <p>This demo showcases the integration with @asafarim/react-themes package:</p>
-          <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', 
-            gap: 'var(--theme-spacing-lg)',
-            margin: 'var(--theme-spacing-lg) 0'
-          }}>
-            <div style={{ 
-              padding: 'var(--theme-spacing-lg)', 
-              backgroundColor: 'var(--theme-color-background-secondary)',
-              borderRadius: 'var(--theme-radius-lg)',
-              border: '1px solid var(--theme-color-border)'
-            }}>
-              <h4 style={{ margin: '0 0 var(--theme-spacing-md) 0', color: 'var(--theme-color-primary)' }}>
-                Current Theme
-              </h4>
+          <div className="theme-demo-grid">
+            <div className="theme-info-card">
+              <h4>Current Theme</h4>
               <p><strong>Mode:</strong> {mode}</p>
               <p><strong>Theme:</strong> {currentTheme.name}</p>
               <p><strong>Primary Color:</strong> {currentTheme.colors.primary}</p>
             </div>
-            <div style={{ 
-              padding: 'var(--theme-spacing-lg)', 
-              backgroundColor: 'var(--theme-color-background-secondary)',
-              borderRadius: 'var(--theme-radius-lg)',
-              border: '1px solid var(--theme-color-border)'
-            }}>
-              <h4 style={{ margin: '0 0 var(--theme-spacing-md) 0', color: 'var(--theme-color-primary)' }}>
-                Quick Theme Switch
-              </h4>
+            <div className="theme-info-card">
+              <h4>Quick Theme Switch</h4>
               <ThemeSelector showLabels={true} />
-              <p style={{ marginTop: 'var(--theme-spacing-md)', fontSize: 'var(--theme-font-size-sm)' }}>
+              <p className="theme-help-text">
                 Try switching themes to see live updates!
               </p>
             </div>
@@ -61,7 +47,7 @@ export default function Overview() {
       <div className="demo-section">
         <h3 className="demo-title">Available Components</h3>
         <div className="props-table">
-          <table style={{ width: '100%' }}>
+          <table style={{ width: "100%" }}>
             <thead>
               <tr>
                 <th>Component</th>
@@ -73,7 +59,10 @@ export default function Overview() {
             <tbody>
               <tr>
                 <td>PackageLinks</td>
-                <td>Displays links to npm package, GitHub repository, and live demo</td>
+                <td>
+                  Displays links to npm package, GitHub repository, and live
+                  demo
+                </td>
                 <td>✅ Yes</td>
                 <td>✅ Ready</td>
               </tr>
@@ -84,13 +73,11 @@ export default function Overview() {
 
       <div className="demo-section">
         <h3 className="demo-title">🚀 Features</h3>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', 
-          gap: 'var(--theme-spacing-lg)' 
-        }}>
+        <div className="features-grid">
           <div>
-            <h4 style={{ color: 'var(--theme-color-primary)' }}>🎨 Theme Integration</h4>
+            <h4 style={{ color: "var(--theme-color-primary)" }}>
+              🎨 Theme Integration
+            </h4>
             <ul>
               <li>Automatic dark/light mode detection</li>
               <li>Manual theme switching</li>
@@ -99,7 +86,9 @@ export default function Overview() {
             </ul>
           </div>
           <div>
-            <h4 style={{ color: 'var(--theme-color-primary)' }}>📱 Responsive Design</h4>
+            <h4 style={{ color: "var(--theme-color-primary)" }}>
+              📱 Responsive Design
+            </h4>
             <ul>
               <li>Mobile-first approach</li>
               <li>Flexible grid layouts</li>
@@ -108,7 +97,9 @@ export default function Overview() {
             </ul>
           </div>
           <div>
-            <h4 style={{ color: 'var(--theme-color-primary)' }}>♿ Accessibility</h4>
+            <h4 style={{ color: "var(--theme-color-primary)" }}>
+              ♿ Accessibility
+            </h4>
             <ul>
               <li>WCAG 2.1 AA compliant</li>
               <li>Keyboard navigation support</li>

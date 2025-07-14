@@ -162,6 +162,14 @@ body {
   border-radius: var(--theme-radius-md, 8px);
   overflow: hidden;
   border: 1px solid var(--theme-color-border, #333);
+  overflow-x: auto;
+  display: block;
+  white-space: nowrap;
+}
+
+.props-table table {
+  width: 100%;
+  min-width: 600px;
 }
 
 .props-table th,
@@ -203,6 +211,19 @@ body {
   font-size: var(--theme-font-size-lg, 1.125rem);
 }
 
+.multiple-examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--theme-spacing-xl, 2rem);
+}
+
+.multiple-examples > div {
+  padding: var(--theme-spacing-lg);
+  background: var(--theme-color-background-secondary);
+  border-radius: var(--theme-radius-md);
+  border: 1px solid var(--theme-color-border);
+}
+
 /* Footer */
 .app-footer {
   margin-top: auto;
@@ -237,6 +258,37 @@ li {
   color: var(--theme-color-text-secondary, #ccc);
 }
 
+/* Theme demo specific styles */
+.theme-demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--theme-spacing-lg);
+  margin: var(--theme-spacing-lg) 0;
+}
+
+.theme-info-card {
+  padding: var(--theme-spacing-lg);
+  background-color: var(--theme-color-background-secondary);
+  border-radius: var(--theme-radius-lg);
+  border: 1px solid var(--theme-color-border);
+}
+
+.theme-info-card h4 {
+  margin: 0 0 var(--theme-spacing-md) 0;
+  color: var(--theme-color-primary);
+}
+
+.theme-help-text {
+  margin-top: var(--theme-spacing-md);
+  font-size: var(--theme-font-size-sm);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--theme-spacing-lg);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .App {
@@ -249,8 +301,14 @@ li {
     gap: var(--theme-spacing-lg, 1rem);
   }
 
+  .header-logo {
+    width: 32px;
+    height: 32px;
+  }
+
   .nav-menu {
     gap: var(--theme-spacing-sm, 0.5rem);
+    flex-wrap: wrap;
   }
 
   .nav-link {
@@ -269,20 +327,45 @@ li {
 
   .props-table {
     font-size: var(--theme-font-size-xs, 0.75rem);
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .props-table table {
+    min-width: 500px;
   }
 
   .props-table th,
   .props-table td {
     padding: var(--theme-spacing-sm, 0.5rem);
+    min-width: 120px;
   }
 
   .demo-code {
     padding: var(--theme-spacing-md, 0.75rem);
     font-size: var(--theme-font-size-xs, 0.75rem);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .demo-code pre {
+    white-space: pre-wrap;
+    word-break: break-word;
   }
 
   .example-showcase {
     padding: var(--theme-spacing-lg, 1rem);
+  }
+
+  .multiple-examples {
+    gap: var(--theme-spacing-lg, 1rem);
+  }
+
+  /* Improve spacing on mobile */
+  .main-content {
+    padding-bottom: var(--theme-spacing-lg, 2rem);
   }
 }
 
@@ -295,14 +378,105 @@ li {
     font-size: var(--theme-font-size-base, 1rem);
   }
 
+  .header-logo {
+    width: 24px;
+    height: 24px;
+  }
+
+  .nav-menu {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--theme-spacing-xs, 0.25rem);
+  }
+
+  .nav-link {
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
+  }
+
+  .demo-section {
+    padding: var(--theme-spacing-md, 0.75rem);
+    margin: var(--theme-spacing-md, 1rem) 0;
+  }
+
+  .demo-title {
+    font-size: var(--theme-font-size-base, 1rem);
+  }
+
   .props-table {
     display: block;
     overflow-x: auto;
     white-space: nowrap;
+    font-size: var(--theme-font-size-xs, 0.75rem);
+  }
+
+  .props-table th,
+  .props-table td {
+    padding: var(--theme-spacing-xs, 0.375rem);
+    min-width: 100px;
+    font-size: var(--theme-font-size-xs, 0.75rem);
   }
 
   .example-showcase {
     padding: var(--theme-spacing-md, 0.75rem);
+  }
+
+  .demo-code {
+    padding: var(--theme-spacing-sm, 0.5rem);
+    font-size: var(--theme-font-size-xs, 0.75rem);
+  }
+
+  .demo-code pre {
+    font-size: var(--theme-font-size-xs, 0.75rem);
+    line-height: 1.4;
+  }
+
+  .theme-info-card {
+    padding: var(--theme-spacing-sm);
+  }
+
+  /* Ensure all grid layouts become single column */
+  div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+    gap: var(--theme-spacing-md, 1rem) !important;
+  }
+
+  /* Very small screens */
+  .App {
+    padding: 0 var(--theme-spacing-xs, 0.25rem);
+  }
+  
+  .demo-section {
+    margin: var(--theme-spacing-sm, 0.75rem) 0;
+  }
+  
+  /* Ensure package links are responsive */
+  .package-links {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .package-links .links-container {
+    flex-direction: column;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .package-links .link-item {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Touch improvements */
+@media (hover: none) {
+  .nav-link {
+    padding: var(--theme-spacing-md, 1rem);
+  }
+  
+  .link-item {
+    padding: var(--theme-spacing-md, 1rem);
   }
 }
 

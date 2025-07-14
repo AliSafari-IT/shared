@@ -13,7 +13,7 @@
     "demo:preview": "cd demo && pnpm preview",
     "demo:install": "cd demo && pnpm install",
     "deploy": "gh-pages -d demo/dist",
-    "predeploy": "pnpm demo:build "
+    "predeploy": "pnpm demo:build"
   },
   "peerDependencies": {
     "react": "^18.2.0",

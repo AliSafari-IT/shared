@@ -108,7 +108,7 @@ export default function PackageLinksDemo() {
           <p>Examples with different package names and paths.</p>
         </div>
         
-        <div className="example-showcase" style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
+        <div className="example-showcase multiple-examples">
           <div>
             <h4>React Component Library</h4>
             <PackageLinks 
