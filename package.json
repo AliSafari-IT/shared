@@ -52,7 +52,7 @@
   "bugs": {
     "url": "https://github.com/AliSafari-IT/shared/issues"
   },
-  "homepage": "https://github.com/AliSafari-IT/shared#readme",
+  "homepage": "https://alisafari-it.github.io/shared/",
   "publishConfig": {
     "access": "public"
   }
