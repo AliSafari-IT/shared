@@ -66,16 +66,20 @@ function App() {
       <div className="App">
         <header className="app-header">
           <div className="header-content">
-            <a href="/shared" title="@asafarim/shared">
-              <span className="header-logo">
-                <SharedDemoLogo />
-              </span>
-            </a>
-            <div className="header-text">
-              <h1>@asafarim/shared</h1>
-              <p>Component Library Demo</p>
+            <div className="header-left">
+              <a href="/shared" title="@asafarim/shared">
+                <span className="header-logo">
+                  <SharedDemoLogo />
+                </span>
+              </a>
+              <div className="header-text">
+                <h1>@asafarim/shared</h1>
+                <p>Component Library Demo</p>
+              </div>
             </div>
-            <ThemeToggle size="md" showLabels={true} />
+            <div className="header-right">
+              <ThemeToggle size="md" showLabels={true} />
+            </div>
           </div>
         </header>
 

@@ -1,11 +1,12 @@
 {
   "name": "shared-demo",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Demo application showcasing @asafarim/shared components",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "predev": "npx kill-port 5173",
     "build": "tsc && vite build",
     "preview": "vite preview"
   },

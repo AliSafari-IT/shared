@@ -7,7 +7,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rollup -c",
-    "dev": "rollup -c -w",
+    "dev": " rollup -c -w",
     "demo:dev": "cd demo && pnpm dev",
     "demo:build": "cd demo && pnpm build",
     "demo:preview": "cd demo && pnpm preview",
