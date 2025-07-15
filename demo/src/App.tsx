@@ -11,13 +11,24 @@ import { ThemeToggle } from "@asafarim/react-themes";
 
 // Embed the SVG directly to avoid path resolution issues
 const SharedDemoLogo = () => (
-  <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="48" height="48" rx="12" fill="#24292F"/>
+  <svg
+    width="48"
+    height="48"
+    viewBox="0 0 48 48"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect width="48" height="48" rx="12" fill="#24292F" />
     <g>
-      <circle cx="24" cy="24" r="14" fill="#4dabf7"/>
-      <path d="M24 12v24M12 24h24" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
-      <circle cx="24" cy="24" r="6" fill="#fff"/>
-      <circle cx="24" cy="24" r="3" fill="#4dabf7"/>
+      <circle cx="24" cy="24" r="14" fill="#4dabf7" />
+      <path
+        d="M24 12v24M12 24h24"
+        stroke="#fff"
+        stroke-width="2.5"
+        stroke-linecap="round"
+      />
+      <circle cx="24" cy="24" r="6" fill="#fff" />
+      <circle cx="24" cy="24" r="3" fill="#4dabf7" />
     </g>
   </svg>
 );
@@ -27,21 +38,21 @@ function Navigation() {
 
   // Check if the current path matches the route, accounting for the basename
   const isActive = (path: string) => {
-    const currentPath = location.pathname.replace('/shared', '');
-    return currentPath === path || (path === '/' && (currentPath === '' || currentPath === '/'));
+    const currentPath = location.pathname.replace("/shared", "");
+    return (
+      currentPath === path ||
+      (path === "/" && (currentPath === "" || currentPath === "/"))
+    );
   };
 
   return (
     <nav className="nav-menu">
-      <Link
-        to="/"
-        className={`nav-link ${isActive('/') ? "active" : ""}`}
-      >
+      <Link to="/" className={`nav-link ${isActive("/") ? "active" : ""}`}>
         Overview
       </Link>
       <Link
         to="/package-links"
-        className={`nav-link ${isActive('/package-links') ? "active" : ""}`}
+        className={`nav-link ${isActive("/package-links") ? "active" : ""}`}
       >
         PackageLinks
       </Link>
