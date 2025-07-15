@@ -79,7 +79,7 @@ function App() {
 
         <footer className="app-footer">
           <p>Built with React + TypeScript + Vite + @asafarim/react-themes</p>
-          <p>
+          <p className="footer-links">
             <a
               href="https://github.com/AliSafari-IT/shared"
               target="_blank"
