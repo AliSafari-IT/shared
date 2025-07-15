@@ -9,11 +9,11 @@
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "demo:dev": "cd demo && pnpm dev",
-    "demo:build": "pnpm build && cd demo && pnpm build",
+    "demo:build": "cd demo && pnpm build",
     "demo:preview": "cd demo && pnpm preview",
     "demo:install": "cd demo && pnpm install",
-    "deploy": "gh-pages -d demo/dist",
-    "predeploy": "pnpm demo:build"
+    "predeploy": "rm -rf node_modules demo/node_modules dist demo/dist && pnpm install && pnpm build && pnpm demo:install && pnpm demo:build",
+    "deploy": "gh-pages -d demo/dist -b gh-pages"
   },
   "peerDependencies": {
     "react": "^18.2.0",

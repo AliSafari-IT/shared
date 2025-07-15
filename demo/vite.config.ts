@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-
+import svgr from 'vite-plugin-svgr'
 import path from 'path'
 import { fileURLToPath } from 'url';
 
@@ -9,7 +9,8 @@ const __dirname = path.dirname(__filename);
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(),
+    svgr()],
   base: process.env.NODE_ENV === 'production' ? '/shared/' : '/',
   resolve: {
     alias: {
@@ -20,6 +21,7 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     emptyOutDir: true,
+    copyPublicDir: true,
   },
   server: {
     port: 5173,
