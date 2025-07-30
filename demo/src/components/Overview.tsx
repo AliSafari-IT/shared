@@ -1,4 +1,5 @@
 import { useTheme, ThemeSelector } from "@asafarim/react-themes";
+import { PackageLinks } from "@asafarim/shared";
 
 export default function Overview() {
   const { mode, currentTheme } = useTheme();
@@ -21,6 +22,12 @@ export default function Overview() {
           </p>
         </div>
       </div>
+
+      <PackageLinks
+        packageName="@asafarim/shared"
+        githubPath="https://github.com/AliSafari-IT/shared"
+        demoPath="https://alisafari-it.github.io/shared/"
+      />
 
       <div className="demo-section">
         <h3 className="demo-title">🎨 Theme System Demo</h3>

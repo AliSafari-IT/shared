@@ -34,6 +34,10 @@ module.exports = defineConfig([
         inject: {
           insertAt: 'top',
         },
+        // Handle @import statements
+        plugins: [],
+        // Extract CSS to separate file instead of injecting
+        extract: false,
       }),
     ],
     external: ['react', 'react-dom'],
@@ -43,8 +47,9 @@ module.exports = defineConfig([
     output: [{ file: 'dist/index.d.ts', format: 'esm' }],
     plugins: [
       dts({
-        exclude: ['**/*.css']
+        exclude: ['**/*.css', '**/*.scss', '**/*.sass']
       })
     ],
+    external: [/\.css$/],
   },
 ]);
