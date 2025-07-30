@@ -81,6 +81,22 @@ export default function Overview() {
                 <td>✅ Yes</td>
                 <td>✅ Ready</td>
               </tr>
+              <tr>
+                <td>SearchItems</td>
+                <td>
+                  Flexible search input component with multiple visual styles and clear functionality
+                </td>
+                <td>✅ Yes</td>
+                <td>✅ Ready</td>
+              </tr>
+              <tr>
+                <td>DDItems</td>
+                <td>
+                  Dropdown/select component with customizable options and visual styles
+                </td>
+                <td>✅ Yes</td>
+                <td>✅ Ready</td>
+              </tr>
             </tbody>
           </table>
         </div>
