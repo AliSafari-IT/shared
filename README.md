@@ -2,7 +2,20 @@
 
 [![npm version](https://img.shields.io/npm/v/@asafarim/shared?color=4dabf7&label=npm)](https://www.npmjs.com/package/@asafarim/shared)
 [![GitHub stars](https://img.shields.io/github/stars/AliSafari-IT/shared?style=social)](https://github.com/AliSafari-IT/shared)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![MIT License](https://img.shields.io/badg## 📦 Version History
+
+### v1.1.1 (Latest)
+- ✨ Added `ButtonComponent` with professional styling and glass morphism effects
+- 🔍 Added `SearchItems` component with multiple visual styles and clear functionality
+- 📋 Added `DDItems` (Dropdown) component with customizable options and styles
+- 🎨 Enhanced theme integration with comprehensive CSS variable system
+- 📱 Improved responsive design and accessibility features
+- 🔧 Fixed build configuration for better CSS handling
+- 📚 Comprehensive demo pages for all components with interactive examples
+
+### v1.0.x
+- 🚀 Initial release with `PackageLinks` component
+- 📚 Basic demo application and documentationIT-blue.svg)](LICENSE)
 
 > **A modern collection of reusable React components and utilities for ASafariM web applications with full theme system integration.**
 
@@ -33,6 +46,15 @@ Explore all components with interactive examples, theme switching, and comprehen
 ---
 
 ## 🧩 Components
+
+This library currently includes four main components, each with multiple variants and comprehensive theme integration:
+
+| Component | Description | Styles | Status |
+|-----------|-------------|---------|--------|
+| **PackageLinks** | Display links to npm, GitHub, and demos | Theme-aware styling | ✅ Ready |
+| **ButtonComponent** | Versatile button with 9 variants, 5 sizes | Primary, Secondary, Success, Danger, Warning, Info, Outline, Ghost, Link | ✅ Ready |
+| **SearchItems** | Flexible search input with clear functionality | Default, Compact, Outlined, Minimal | ✅ Ready |
+| **DDItems** | Dropdown/select with customizable options | Default, Compact, Outlined, Minimal | ✅ Ready |
 
 ### `PackageLinks`
 A flexible, theme-aware component for displaying links to npm packages, GitHub repositories, and live demos.
@@ -105,6 +127,101 @@ function App() {
 | className    | `string`                                | -           | Additional CSS classes                         |
 | children     | `ReactNode`                             | -           | Button content                                 |
 
+### `SearchItems`
+A flexible search input component with multiple visual styles and built-in clear functionality. Perfect for filtering, searching, and form inputs.
+
+#### Usage
+```tsx
+import { SearchItems } from '@asafarim/shared';
+
+function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+  
+  return (
+    <div>
+      <SearchItems
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        placeholder="Search components..."
+        searchType="default"
+      />
+      
+      <SearchItems
+        searchTerm={searchTerm}
+        onSearchChange={setSearchTerm}
+        placeholder="Filter results..."
+        searchType="outlined"
+      />
+    </div>
+  );
+}
+```
+
+#### Props
+| Prop           | Type                                    | Default             | Description                                    |
+|----------------|-----------------------------------------|---------------------|------------------------------------------------|
+| searchTerm     | `string`                                | -                   | Current search value (controlled)              |
+| onSearchChange | `(value: string) => void`               | -                   | Callback when search value changes             |
+| placeholder    | `string`                                | `"Search projects..."` | Placeholder text for the input              |
+| className      | `string`                                | `"search-input"`    | CSS class name for the input element          |
+| searchType     | `'default'` \| `'compact'` \| `'outlined'` \| `'minimal'` | `'default'` | Visual style variant |
+
+### `DDItems` (Dropdown Items)
+A dropdown/select component with customizable options and multiple visual styles. Ideal for forms, filters, and selection controls.
+
+#### Usage
+```tsx
+import { DDItems } from '@asafarim/shared';
+
+function App() {
+  const [selectedValue, setSelectedValue] = useState('');
+  
+  const options = [
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue.js' },
+    { value: 'angular', label: 'Angular' },
+  ];
+  
+  return (
+    <div>
+      <DDItems
+        selectedValue={selectedValue}
+        onValueChange={setSelectedValue}
+        items={options}
+        dropdownType="default"
+        placeholder="Select framework..."
+      />
+      
+      <DDItems
+        selectedValue={selectedValue}
+        onValueChange={setSelectedValue}
+        items={options}
+        dropdownType="outlined"
+        placeholder="Choose option..."
+      />
+    </div>
+  );
+}
+```
+
+#### Props
+| Prop           | Type                                    | Default             | Description                                    |
+|----------------|-----------------------------------------|---------------------|------------------------------------------------|
+| selectedValue  | `string`                                | -                   | Currently selected value (controlled)          |
+| onValueChange  | `(value: string) => void`               | -                   | Callback when selection changes                |
+| items          | `DropdownItem[]`                        | -                   | Array of options with value and label         |
+| dropdownType   | `'default'` \| `'compact'` \| `'outlined'` \| `'minimal'` | `'default'` | Visual style variant |
+| className      | `string`                                | `"filter-select"`   | CSS class name for the select element         |
+| placeholder    | `string`                                | `"Select an option"` | Placeholder text when no option selected     |
+
+#### DropdownItem Interface
+```tsx
+interface DropdownItem {
+  value: string;
+  label: string;
+}
+```
+
 ---
 
 ## 🎨 Theme Integration
@@ -117,21 +234,58 @@ This library is designed to work seamlessly with **@asafarim/react-themes** for 
 - ⚡ **Smooth Transitions**: Seamless theme switching animations
 - 📱 **Responsive Design**: Mobile-first approach with touch-friendly controls
 - ♿ **Accessibility**: WCAG 2.1 AA compliant with keyboard navigation support
+- 🎯 **Multiple Variants**: Each component offers different visual styles
+- 🔧 **TypeScript Support**: Full type definitions for better developer experience
+- 📦 **Tree Shaking**: Optimized bundle size with selective imports
+
+### Component Features by Type
+
+#### Form & Input Components
+- **SearchItems**: 4 visual styles, built-in clear button, focus states
+- **DDItems**: 4 visual styles, custom dropdown arrow, keyboard navigation
+- **ButtonComponent**: 9 variants, 5 sizes, loading states, icon support
+
+#### Display Components  
+- **PackageLinks**: Automatic link generation, responsive layout, icon integration
 
 ### Basic Setup
 ```tsx
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from '@asafarim/react-themes';
-import { PackageLinks, ButtonComponent } from '@asafarim/shared';
+import { PackageLinks, ButtonComponent, SearchItems, DDItems } from '@asafarim/shared';
 import '@asafarim/react-themes/styles.css';
 
 function App() {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedFramework, setSelectedFramework] = useState('');
+  
+  const frameworkOptions = [
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue.js' },
+    { value: 'angular', label: 'Angular' },
+  ];
+
   return (
     <ThemeProvider defaultMode="auto" persistMode={true}>
       <div>
         <ButtonComponent variant="primary">
           Click me!
         </ButtonComponent>
+        
+        <SearchItems
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
+          placeholder="Search components..."
+          searchType="outlined"
+        />
+        
+        <DDItems
+          selectedValue={selectedFramework}
+          onValueChange={setSelectedFramework}
+          items={frameworkOptions}
+          dropdownType="outlined"
+          placeholder="Select framework..."
+        />
         
         <PackageLinks 
           packageName="@asafarim/shared" 
@@ -176,14 +330,21 @@ pnpm demo:preview
 shared/
 ├── src/            # Library source code
 │   ├── components/ # React components
-│   │   ├── Button/ # ButtonComponent
-│   │   └── Links/  # PackageLinks
+│   │   ├── Button/     # ButtonComponent
+│   │   ├── Links/      # PackageLinks
+│   │   ├── SearchBox/  # SearchItems
+│   │   └── Dropdowns/  # DDItems
 │   ├── styles/     # Global CSS variables and theme system
 │   ├── index.ts    # Entry point
 │   └── types.d.ts  # TypeScript definitions
 ├── demo/           # Demo app (Vite + React)
 │   ├── src/
-│   │   ├── components/
+│   │   ├── components/ # Demo components
+│   │   │   ├── Overview.tsx
+│   │   │   ├── PackageLinksDemo.tsx
+│   │   │   ├── ButtonComponentDemo.tsx
+│   │   │   ├── SearchItemsDemo.tsx
+│   │   │   └── DDItemsDemo.tsx
 │   │   └── pages/
 │   └── dist/       # Built demo
 ├── dist/           # Built library
@@ -236,3 +397,58 @@ MIT © [AliSafari-IT](https://github.com/AliSafari-IT)
 
 - **[@asafarim/react-themes](https://www.npmjs.com/package/@asafarim/react-themes)** - Theme system integration
 - **[@asafarim/display-code](https://www.npmjs.com/package/@asafarim/display-code)** - Code syntax highlighting component
+
+---
+
+## 📖 Quick Reference
+
+### All Available Imports
+```tsx
+import { 
+  PackageLinks,      // Link display component
+  ButtonComponent,   // Versatile button with variants
+  SearchItems,       // Search input with styles
+  DDItems           // Dropdown/select component
+} from '@asafarim/shared';
+```
+
+### Common Patterns
+```tsx
+// Basic form with all components
+function ContactForm() {
+  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('');
+  
+  return (
+    <form>
+      <SearchItems
+        searchTerm={search}
+        onSearchChange={setSearch}
+        searchType="outlined"
+        placeholder="Search..."
+      />
+      
+      <DDItems
+        selectedValue={category}
+        onValueChange={setCategory}
+        items={categoryOptions}
+        dropdownType="outlined"
+        placeholder="Select category"
+      />
+      
+      <ButtonComponent 
+        type="submit" 
+        variant="primary"
+        size="lg"
+      >
+        Submit
+      </ButtonComponent>
+    </form>
+  );
+}
+```
+
+### Style Variants Quick Reference
+- **Button Variants**: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `outline`, `ghost`, `link`
+- **Button Sizes**: `xs`, `sm`, `md`, `lg`, `xl`
+- **Search/Dropdown Types**: `default`, `compact`, `outlined`, `minimal`

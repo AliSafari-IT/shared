@@ -1,6 +1,6 @@
 {
   "name": "@asafarim/shared",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Shared components and utilities for ASafariM web applications",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
