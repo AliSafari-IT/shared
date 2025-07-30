@@ -1,0 +1,217 @@
+/* Base styles */
+:root {
+  /* Color Variables */
+  --primary-color-light: #3498db;
+  --primary-color-dark: #2d5db8;
+  --secondary-color-light: #0594b8;
+  --secondary-color-dark: #05404e;
+  --muted-color-light: #7f8c8d;
+  --muted-color-dark: #2c3e50;
+  --inverse-color-light: #000000;
+  --inverse-color-dark: #ffffff;
+  --success-color-light: #15793e;
+  --success-color-dark: #159903;
+  --error-color-light: #e74c3c;
+  --error-color-dark: #c00909;
+  --warning-color-light: #fcd640;
+  --warning-color-dark: #cdaA00;
+  --info-color-light: #64befa;
+  --info-color-dark: #1069a5;
+  --text-color-light: #333;
+  --text-color-dark: #f5f5f5;
+  --text-secondary-light: #666;
+  --text-secondary-dark: #aaa;
+  --bg-color-light: #f5f5f5;
+  --bg-color-dark: #222;
+  --bg-secondary-light: #fafafa;
+  --bg-secondary-dark: #2a2a2a;
+  --card-bg-light: #fff;
+  --card-bg-dark: #333;
+  --border-color-light: #ddd;
+  --border-color-dark: #444;
+  --hover-bg-light: #f0f0f0;
+  --hover-bg-dark: #3a3a3a;
+  --primary-hover-light: #2980b9;
+  --primary-hover-dark: #1e4a8c;
+  --primary-color-alpha-light: rgba(52, 152, 219, 0.1);
+  --primary-color-alpha-dark: rgba(45, 93, 184, 0.1);
+  --danger-color-light: #dc2626;
+  --danger-color-dark: #ef4444;
+  --danger-bg-light: #fee;
+  --danger-bg-dark: rgba(239, 68, 68, 0.1);
+
+  /* Additional Color Variants for Professional Buttons */
+  --success-color-light-variant: #10b981;
+  --secondary-color-light-variant: #06b6d4;
+  --warning-color-light-variant: #f59e0b;
+  --info-color-light-variant: #3b82f6;
+
+  /* Spacing Variables */
+  --theme-spacing-0-5: 0.125rem;  /* 2px */
+  --theme-spacing-xs: 0.25rem;    /* 4px */
+  --theme-spacing-1: 0.25rem;     /* 4px */
+  --theme-spacing-1-5: 0.375rem;  /* 6px */
+  --theme-spacing-sm: 0.5rem;     /* 8px */
+  --theme-spacing-2: 0.5rem;      /* 8px */
+  --theme-spacing-2-5: 0.625rem;  /* 10px */
+  --theme-spacing-3: 0.75rem;     /* 12px */
+  --theme-spacing-md: 1rem;       /* 16px */
+  --theme-spacing-4: 1rem;        /* 16px */
+  --theme-spacing-lg: 1.5rem;     /* 24px */
+  --theme-spacing-5: 1.25rem;     /* 20px */
+  --theme-spacing-6: 1.5rem;      /* 24px */
+  --theme-spacing-3-5: 0.875rem;  /* 14px */
+  --theme-spacing-7: 1.75rem;     /* 28px */
+  --theme-spacing-8: 2rem;        /* 32px */
+  --theme-spacing-xl: 2rem;       /* 32px */
+  --theme-spacing-10: 2.5rem;     /* 40px */
+  --theme-spacing-2xl: 3rem;      /* 48px */
+  --theme-spacing-3xl: 4rem;      /* 64px */
+
+  /* Border Radius Variables */
+  --theme-radius-none: 0;
+  --theme-radius-sm: 0.25rem;    /* 4px */
+  --theme-radius-md: 0.5rem;     /* 8px */
+  --theme-radius-lg: 0.75rem;    /* 12px */
+  --theme-radius-xl: 1rem;       /* 16px */
+  --theme-radius-2xl: 1.5rem;    /* 24px */
+  --theme-radius-full: 9999px;
+
+  /* Typography Variables */
+  --theme-font-size-xs: 0.75rem;    /* 12px */
+  --theme-font-size-sm: 0.875rem;   /* 14px */
+  --theme-font-size-base: 1rem;     /* 16px */
+  --theme-font-size-lg: 1.125rem;   /* 18px */
+  --theme-font-size-xl: 1.25rem;    /* 20px */
+  --theme-font-size-2xl: 1.5rem;    /* 24px */
+  --theme-font-size-3xl: 1.875rem;  /* 30px */
+  --theme-font-size-4xl: 2.25rem;   /* 36px */
+  --theme-font-size-5xl: 3rem;      /* 48px */
+
+  /* Font Weight Variables */
+  --theme-font-weight-light: 300;
+  --theme-font-weight-normal: 400;
+  --theme-font-weight-medium: 500;
+  --theme-font-weight-semibold: 600;
+  --theme-font-weight-bold: 700;
+  --theme-font-weight-extrabold: 800;
+
+  /* Line Height Variables */
+  --theme-line-height-tight: 1.25;
+  --theme-line-height-snug: 1.375;
+  --theme-line-height-normal: 1.5;
+  --theme-line-height-relaxed: 1.625;
+  --theme-line-height-loose: 2;
+
+  /* Transition Variables */
+  --theme-transition-none: none;
+  --theme-transition-fast: 150ms ease;
+  --theme-transition-normal: 200ms ease;
+  --theme-transition-slow: 300ms ease;
+  --theme-transition-all-fast: all 150ms ease;
+  --theme-transition-all-normal: all 200ms ease;
+  --theme-transition-all-slow: all 300ms ease;
+  --theme-transition-colors: color 200ms ease, background-color 200ms ease, border-color 200ms ease;
+  --theme-transition-transform: transform 200ms ease;
+  --theme-transition-opacity: opacity 200ms ease;
+
+  /* Shadow Variables */
+  --theme-shadow-none: none;
+  --theme-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --theme-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --theme-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --theme-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --theme-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --theme-shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+  --theme-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.1);
+  --theme-shadow-focus-high: 0 0 0 4px rgba(59, 130, 246, 0.2), 0 0 0 6px rgba(0, 0, 0, 0.8);
+
+}
+
+[data-theme="light"] {
+  --primary-color: var(--primary-color-light);
+  --secondary-color: var(--secondary-color-light);
+  --muted-color: var(--muted-color-light);
+  --success-color: var(--success-color-light);
+  --error-color: var(--error-color-light);
+  --warning-color: var(--warning-color-light);
+  --inverse-color: var(--inverse-color-light);
+  --info-color: var(--info-color-light);
+  --text-color: var(--text-color-light);
+  --text-secondary: var(--text-secondary-light);
+  --bg-color: var(--bg-color-light);
+  --bg-secondary: var(--bg-secondary-light);
+  --card-bg: var(--card-bg-light);
+  --border-color: var(--border-color-light);
+  --hover-bg: var(--hover-bg-light);
+  --primary-hover: var(--primary-hover-light);
+  --primary-color-alpha: var(--primary-color-alpha-light);
+  --danger-color: var(--danger-color-light);
+  --danger-bg: var(--danger-bg-light);
+
+  --error-background: var(--error-color-dark);
+  --info-background: var(--info-color-dark);
+  --success-background: var(--success-color-dark);
+  --warning-background: var(--warning-color-dark);
+
+  /* Theme-specific variables for light mode */
+  --theme-color-primary: var(--primary-color-light);
+  --theme-color-primary-hover: var(--primary-hover-light);
+  --theme-color-secondary: var(--secondary-color-light);
+  --theme-color-text: var(--text-color-light);
+  --theme-color-text-secondary: var(--text-secondary-light);
+  --theme-color-background: var(--bg-color-light);
+  --theme-color-background-secondary: var(--bg-secondary-light);
+  --theme-color-border: var(--border-color-light);
+  --theme-color-success: var(--success-color-light);
+  --theme-color-error: var(--error-color-light);
+  --theme-color-warning: var(--warning-color-light);
+  --theme-color-info: var(--info-color-light);
+  --theme-color-muted: var(--muted-color-light);
+  --theme-color-inverse: var(--inverse-color-light);
+  --theme-color-primary-alpha: var(--primary-color-alpha-light);
+}
+
+[data-theme="dark"] {
+  --primary-color: var(--primary-color-dark);
+  --secondary-color: var(--secondary-color-dark);
+  --muted-color: var(--muted-color-dark);
+  --inverse-color: var(--inverse-color-dark);
+  --success-color: var(--success-color-dark);
+  --error-color: var(--error-color-dark);
+  --warning-color: var(--warning-color-dark);
+  --info-color: var(--info-color-dark);
+  --text-color: var(--text-color-dark);
+  --text-secondary: var(--text-secondary-dark);
+  --bg-color: var(--bg-color-dark);
+  --bg-secondary: var(--bg-secondary-dark);
+  --card-bg: var(--card-bg-dark);
+  --border-color: var(--border-color-dark);
+  --hover-bg: var(--hover-bg-dark);
+  --primary-hover: var(--primary-hover-dark);
+  --primary-color-alpha: var(--primary-color-alpha-dark);
+  --danger-color: var(--danger-color-dark);
+  --danger-bg: var(--danger-bg-dark);
+
+  --error-background: var(--error-color-light);
+  --info-background: var(--info-color-light);
+  --success-background: var(--success-color-light);
+  --warning-background: var(--warning-color-light);
+
+  /* Theme-specific variables for dark mode */
+  --theme-color-primary: var(--primary-color-dark);
+  --theme-color-primary-hover: var(--primary-hover-dark);
+  --theme-color-secondary: var(--secondary-color-dark);
+  --theme-color-text: var(--text-color-dark);
+  --theme-color-text-secondary: var(--text-secondary-dark);
+  --theme-color-background: var(--bg-color-dark);
+  --theme-color-background-secondary: var(--bg-secondary-dark);
+  --theme-color-border: var(--border-color-dark);
+  --theme-color-success: var(--success-color-dark);
+  --theme-color-error: var(--error-color-dark);
+  --theme-color-warning: var(--warning-color-dark);
+  --theme-color-info: var(--info-color-dark);
+  --theme-color-muted: var(--muted-color-dark);
+  --theme-color-inverse: var(--inverse-color-dark);
+  --theme-color-primary-alpha: var(--primary-color-alpha-dark);
+}

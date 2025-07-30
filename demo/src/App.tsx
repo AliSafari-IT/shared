@@ -7,6 +7,7 @@ import {
 } from "react-router-dom";
 import Overview from "./components/Overview";
 import PackageLinksDemo from "./components/PackageLinksDemo";
+import ButtonComponentDemo from "./components/ButtonComponentDemo";
 import { ThemeToggle } from "@asafarim/react-themes";
 
 // Embed the SVG directly to avoid path resolution issues
@@ -56,6 +57,12 @@ function Navigation() {
       >
         PackageLinks
       </Link>
+      <Link
+        to="/button-component"
+        className={`nav-link ${isActive("/button-component") ? "active" : ""}`}
+      >
+        ButtonComponent
+      </Link>
     </nav>
   );
 }
@@ -89,6 +96,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Overview />} />
             <Route path="/package-links" element={<PackageLinksDemo />} />
+            <Route path="/button-component" element={<ButtonComponentDemo />} />
           </Routes>
         </main>
 

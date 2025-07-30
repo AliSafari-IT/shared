@@ -66,6 +66,14 @@ export default function Overview() {
                 <td>✅ Yes</td>
                 <td>✅ Ready</td>
               </tr>
+              <tr>
+                <td>ButtonComponent</td>
+                <td>
+                  Versatile button component with multiple variants, sizes, and states
+                </td>
+                <td>✅ Yes</td>
+                <td>✅ Ready</td>
+              </tr>
             </tbody>
           </table>
         </div>
