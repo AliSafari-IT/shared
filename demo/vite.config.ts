@@ -26,7 +26,7 @@ export default defineConfig(({ mode }) => {
       copyPublicDir: true,
     },
     server: {
-      port: 5173,
+      port: 3173,
       strictPort: true,
     }
   };

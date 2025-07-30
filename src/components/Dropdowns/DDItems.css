@@ -1,0 +1,101 @@
+@import url('../../styles/index.css');
+
+.dropdown-container {
+  /* Component-specific overrides if needed */
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-container:hover .filter-select {
+  border-color: var(--theme-color-primary);
+}
+
+.filter-select {
+  /* Additional select-specific styling */
+  outline: none;
+  font-family: inherit;
+  font-weight: var(--theme-font-weight-normal);
+  line-height: var(--theme-line-height-normal);
+  letter-spacing: 0.01em;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--theme-color-primary) !important;
+  box-shadow: 0 0 0 2px var(--theme-color-primary-alpha) !important;
+}
+
+.filter-select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--theme-color-background-secondary);
+  color: var(--theme-color-text-secondary);
+}
+
+.filter-select option {
+  padding: var(--theme-spacing-sm) var(--theme-spacing-md);
+  font-size: inherit;
+  line-height: 1.4;
+}
+
+.filter-select option:hover {
+  background-color: var(--theme-color-primary);
+  color: var(--theme-color-background);
+}
+
+/* Filter group container */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--theme-spacing-xs);
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .dropdown-container {
+    width: 100%;
+    max-width: none;
+  }
+  
+  .filter-select {
+    font-size: var(--theme-font-size-base);
+    padding: var(--theme-spacing-sm) var(--theme-spacing-md);
+    padding-right: var(--theme-spacing-xl);
+  }
+}
+
+/* Dark mode specific adjustments */
+[data-theme="dark"] .filter-select {
+  border-color: var(--theme-color-border);
+  background-color: var(--theme-color-background-secondary);
+  color: var(--theme-color-text);
+}
+
+[data-theme="dark"] .filter-select option {
+  background-color: var(--theme-color-background-secondary);
+  color: var(--theme-color-text);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .filter-select {
+    border-width: 2px;
+    border-color: var(--theme-color-text);
+  }
+  
+  .filter-select:focus {
+    border-color: var(--theme-color-primary);
+    box-shadow: 0 0 0 3px var(--theme-color-primary-alpha);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .filter-select {
+    transition: none;
+  }
+  
+  .dropdown-container:hover .filter-select {
+    transition: none;
+  }
+}

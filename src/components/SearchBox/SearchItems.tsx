@@ -1,4 +1,5 @@
 import React from 'react';
+import './SearchItems.css'; // Import the component's CSS file
 
 type SearchType = 'default' | 'compact' | 'outlined' | 'minimal';
 

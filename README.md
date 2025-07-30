@@ -2,20 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@asafarim/shared?color=4dabf7&label=npm)](https://www.npmjs.com/package/@asafarim/shared)
 [![GitHub stars](https://img.shields.io/github/stars/AliSafari-IT/shared?style=social)](https://github.com/AliSafari-IT/shared)
-[![MIT License](https://img.shields.io/badg## 📦 Version History
-
-### v1.1.1 (Latest)
-- ✨ Added `ButtonComponent` with professional styling and glass morphism effects
-- 🔍 Added `SearchItems` component with multiple visual styles and clear functionality
-- 📋 Added `DDItems` (Dropdown) component with customizable options and styles
-- 🎨 Enhanced theme integration with comprehensive CSS variable system
-- 📱 Improved responsive design and accessibility features
-- 🔧 Fixed build configuration for better CSS handling
-- 📚 Comprehensive demo pages for all components with interactive examples
-
-### v1.0.x
-- 🚀 Initial release with `PackageLinks` component
-- 📚 Basic demo application and documentationIT-blue.svg)](LICENSE)
+[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 > **A modern collection of reusable React components and utilities for ASafariM web applications with full theme system integration.**
 
