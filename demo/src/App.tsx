@@ -9,6 +9,7 @@ import Overview from "./components/Overview";
 import PackageLinksDemo from "./components/PackageLinksDemo";
 import ButtonComponentDemo from "./components/ButtonComponentDemo";
 import { ThemeToggle } from "@asafarim/react-themes";
+import SearchItemsDemo from "./components/SearchItemsDemo";
 
 // Embed the SVG directly to avoid path resolution issues
 const SharedDemoLogo = () => (
@@ -63,6 +64,12 @@ function Navigation() {
       >
         ButtonComponent
       </Link>
+      <Link
+        to="/search-box"
+        className={`nav-link ${isActive("/search-box") ? "active" : ""}`}
+      >
+        SearchBox
+      </Link>
     </nav>
   );
 }
@@ -97,6 +104,8 @@ function App() {
             <Route path="/" element={<Overview />} />
             <Route path="/package-links" element={<PackageLinksDemo />} />
             <Route path="/button-component" element={<ButtonComponentDemo />} />
+            <Route path="/search-box" element={<SearchItemsDemo  />} />
+            {/* Add more routes as needed */}
           </Routes>
         </main>
 
