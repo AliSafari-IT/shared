@@ -12,9 +12,9 @@ const InputFieldsDemo: React.FC = () => {
     useState<InputStylingType>("default");
   const inputRef = useRef<InputFieldsRef>(null);
 
-  const handleValueChange = (value: string, name?: string) => {
+  const handleValueChange = (value: string | boolean, name?: string) => {
     if (name) {
-      setDemoValues((prev) => ({ ...prev, [name]: value }));
+      setDemoValues((prev) => ({ ...prev, [name]: String(value) }));
     }
   };
 
@@ -148,7 +148,7 @@ const InputFieldsDemo: React.FC = () => {
                       { value: "option1", label: "Option 1" },
                       { value: "option2", label: "Option 2" },
                     ],
-                  })}                  
+                  })}
                 />
               </div>
             );
@@ -268,6 +268,13 @@ const InputFieldsDemo: React.FC = () => {
               helperText="Maximum 50 characters allowed"
             />
           </div>
+          <InputFields.Checkbox
+            name="isActive"
+            label="Is Active?"
+            checked={demoValues["isActive"] === "true"}
+            onChange={(checked: boolean) => handleValueChange(checked, "isActive")}
+            key="isActive_checkbox"
+          />
         </div>
       </div>
 

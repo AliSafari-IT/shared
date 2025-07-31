@@ -28,6 +28,12 @@ interface Option {
   label: string;
 }
 
+// Checkbox-specific props: use `checked` boolean and callback
+type CheckboxProps = Omit<InputFieldsProps, "value" | "onChange"> & {
+  checked?: boolean;
+  onChange?: (checked: boolean, name?: string) => void;
+};
+
 // Define validation rules
 export interface ValidationRule {
   required?: boolean;
@@ -462,9 +468,21 @@ const TimeField = React.forwardRef<InputFieldsRef, InputFieldsProps>(
 const SelectField = React.forwardRef<InputFieldsRef, InputFieldsProps>(
   (props, ref) => <BaseInputFields {...props} ref={ref} type="select" />
 );
-const CheckboxField = React.forwardRef<InputFieldsRef, InputFieldsProps>(
-  (props, ref) => <BaseInputFields {...props} ref={ref} type="checkbox" />
+// Checkbox wrapper: expose `checked` instead of string `value`
+const Checkbox = forwardRef<InputFieldsRef, CheckboxProps>(
+  ({ checked = false, onChange, ...rest }, ref) => (
+    <BaseInputFields
+      {...rest}
+      ref={ref}
+      type="checkbox"
+      // feed BaseInputFields a string under the hood
+      value={checked ? "true" : "false"}
+      // map string back to boolean
+      onChange={(val: string, name?: string) => onChange?.(val === "true", name)}
+    />
+  )
 );
+Checkbox.displayName = "InputFields.Checkbox";
 const RadioField = React.forwardRef<InputFieldsRef, InputFieldsProps>(
   (props, ref) => <BaseInputFields {...props} ref={ref} type="radio" />
 );
@@ -492,7 +510,7 @@ interface ExtendedInputFields
   Date: typeof DateField;
   Time: typeof TimeField;
   Select: typeof SelectField;
-  Checkbox: typeof CheckboxField;
+  Checkbox: typeof Checkbox;
   Radio: typeof RadioField;
   File: typeof FileField;
   Hidden: typeof HiddenField;
@@ -510,7 +528,7 @@ InputFields.Search = Search;
 InputFields.Date = DateField;
 InputFields.Time = TimeField;
 InputFields.Select = SelectField;
-InputFields.Checkbox = CheckboxField;
+InputFields.Checkbox = Checkbox;
 InputFields.Radio = RadioField;
 InputFields.File = FileField;
 InputFields.Hidden = HiddenField;
