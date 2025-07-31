@@ -3,3 +3,5 @@ export { default as ButtonComponent } from './components/Button/ButtonComponent'
 export { default as SearchItems } from './components/SearchBox/SearchItems';
 export { default as DDItems } from './components/Dropdowns/DDItems';
 
+// Export CSS files for manual import if needed
+export { default as styles } from './styles/index.css';

@@ -1,10 +1,11 @@
 {
   "name": "@asafarim/shared",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "Shared components and utilities for ASafariM web applications",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
+  "style": "dist/styles.css",
   "scripts": {
     "build": "rollup -c",
     "dev": " rollup -c -w",
@@ -37,7 +38,9 @@
   "files": [
     "dist",
     "src",
-    "demo"
+    "demo",
+    "ReadMe.md",
+    "Styling.md"
   ],
   "repository": {
     "type": "git",

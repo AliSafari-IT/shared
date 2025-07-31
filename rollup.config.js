@@ -31,13 +31,13 @@ module.exports = defineConfig([
       postcss({
         extensions: ['.css'],
         minimize: true,
-        inject: {
-          insertAt: 'top',
-        },
+        // Extract CSS to separate file that consumers can import
+        extract: 'styles.css',
+        // Also inject for immediate use
+        inject: false,
+        sourceMap: true,
         // Handle @import statements
         plugins: [],
-        // Extract CSS to separate file instead of injecting
-        extract: false,
       }),
     ],
     external: ['react', 'react-dom'],

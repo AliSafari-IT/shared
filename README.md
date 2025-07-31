@@ -21,6 +21,20 @@ pnpm add @asafarim/shared @asafarim/react-themes
 npm install @asafarim/shared @asafarim/react-themes
 ```
 
+## 🎨 Import Styles
+
+**Important:** Components require CSS imports to display correctly.
+
+```tsx
+// Import styles in your main entry file
+import '@asafarim/shared/dist/styles.css';
+
+// Then use components
+import { ButtonComponent, SearchItems, DDItems } from '@asafarim/shared';
+```
+
+**📖 For detailed styling instructions, see [STYLING.md](./STYLING.md)**
+
 ---
 
 ## 🌐 Live Demo & Documentation
