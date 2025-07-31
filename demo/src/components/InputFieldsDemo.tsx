@@ -1,15 +1,20 @@
-import React, { useState, useRef } from 'react';
-import InputFields, { InputFieldsRef, InputStylingType, InputFieldType } from '../../../src/components/Inputs/InputFields';
-import './InputFieldsDemo.css';
+import React, { useState, useRef } from "react";
+import InputFields, {
+  InputFieldsRef,
+  InputStylingType,
+  InputFieldType,
+} from "../../../src/components/Inputs/InputFields";
+import "./InputFieldsDemo.css";
 
 const InputFieldsDemo: React.FC = () => {
   const [demoValues, setDemoValues] = useState<Record<string, string>>({});
-  const [currentStyling, setCurrentStyling] = useState<InputStylingType>('default');
+  const [currentStyling, setCurrentStyling] =
+    useState<InputStylingType>("default");
   const inputRef = useRef<InputFieldsRef>(null);
 
   const handleValueChange = (value: string, name?: string) => {
     if (name) {
-      setDemoValues(prev => ({ ...prev, [name]: value }));
+      setDemoValues((prev) => ({ ...prev, [name]: value }));
     }
   };
 
@@ -20,41 +25,53 @@ const InputFieldsDemo: React.FC = () => {
   const validateEmail = (value: string): string | null => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (value && !emailRegex.test(value)) {
-      return 'Please enter a valid email address';
+      return "Please enter a valid email address";
     }
     return null;
   };
 
   const validatePassword = (value: string): string | null => {
     if (value.length > 0 && value.length < 8) {
-      return 'Password must be at least 8 characters long';
+      return "Password must be at least 8 characters long";
     }
     return null;
   };
 
-  const inputTypes: { type: InputFieldType; label: string; icon?: React.ReactNode }[] = [
-    { type: 'text', label: 'Text Input', icon: '📝' },
-    { type: 'email', label: 'Email Input', icon: '📧' },
-    { type: 'password', label: 'Password Input', icon: '🔒' },
-    { type: 'number', label: 'Number Input', icon: '#️⃣' },
-    { type: 'range', label: 'Range Slider', icon: '🎚️' },
-    { type: 'tel', label: 'Phone Input', icon: '📞' },
-    { type: 'url', label: 'URL Input', icon: '🌐' },
-    { type: 'search', label: 'Search Input', icon: '🔍' },
-    { type: 'date', label: 'Date Input', icon: '📅' },
-    { type: 'time', label: 'Time Input', icon: '⏰' },
-    { type: 'textarea', label: 'Textarea', icon: '📄' },
-    { type: 'select', label: 'Select Dropdown', icon: '📋' },
-    { type: 'checkbox', label: 'Checkbox', icon: '☑️' },
-    { type: 'radio', label: 'Radio Button', icon: '🔘' },
-    { type: 'file', label: 'File Upload', icon: '📁' },
-    { type: 'hidden', label: 'Hidden Input', icon: '🔒' }
+  const inputTypes: {
+    type: InputFieldType;
+    label: string;
+    icon?: React.ReactNode;
+  }[] = [
+    { type: "text", label: "Text Input", icon: "📝" },
+    { type: "email", label: "Email Input", icon: "📧" },
+    { type: "password", label: "Password Input", icon: "🔒" },
+    { type: "number", label: "Number Input", icon: "#️⃣" },
+    { type: "range", label: "Range Slider", icon: "🎚️" },
+    { type: "tel", label: "Phone Input", icon: "📞" },
+    { type: "url", label: "URL Input", icon: "🌐" },
+    { type: "search", label: "Search Input", icon: "🔍" },
+    { type: "date", label: "Date Input", icon: "📅" },
+    { type: "time", label: "Time Input", icon: "⏰" },
+    { type: "textarea", label: "Textarea", icon: "📄" },
+    { type: "select", label: "Select Dropdown", icon: "📋" },
+    { type: "checkbox", label: "Checkbox", icon: "☑️" },
+    { type: "radio", label: "Radio Button", icon: "🔘" },
+    { type: "file", label: "File Upload", icon: "📁" },
+    { type: "hidden", label: "Hidden Input", icon: "🔒" },
   ];
 
-  const stylingTypes: InputStylingType[] = ['default', 'compact', 'outlined', 'minimal'];
+  const stylingTypes: InputStylingType[] = [
+    "default",
+    "compact",
+    "outlined",
+    "minimal",
+  ];
 
   // Map each input type to its static subcomponent
-  const inputComponents: Record<InputFieldType, React.ForwardRefExoticComponent<any>> = {
+  const inputComponents: Record<
+    InputFieldType,
+    React.ForwardRefExoticComponent<any>
+  > = {
     text: InputFields.Text,
     email: InputFields.Email,
     password: InputFields.Password,
@@ -70,7 +87,7 @@ const InputFieldsDemo: React.FC = () => {
     checkbox: InputFields.Checkbox,
     radio: InputFields.Radio,
     file: InputFields.File,
-    hidden: InputFields.Hidden
+    hidden: InputFields.Hidden,
   };
 
   return (
@@ -78,8 +95,8 @@ const InputFieldsDemo: React.FC = () => {
       <div className="demo-header">
         <h1>InputFields Component Demo</h1>
         <p>
-          A comprehensive form input component supporting 10 input types with 4 styling variants,
-          validation, states, and accessibility features.
+          A comprehensive form input component supporting 10 input types with 4
+          styling variants, validation, states, and accessibility features.
         </p>
       </div>
 
@@ -90,7 +107,9 @@ const InputFieldsDemo: React.FC = () => {
           {stylingTypes.map((style) => (
             <button
               key={style}
-              className={`styling-btn ${currentStyling === style ? 'active' : ''}`}
+              className={`styling-btn ${
+                currentStyling === style ? "active" : ""
+              }`}
               onClick={() => setCurrentStyling(style)}
             >
               {style.charAt(0).toUpperCase() + style.slice(1)}
@@ -107,17 +126,29 @@ const InputFieldsDemo: React.FC = () => {
             const SpecificInput = inputComponents[type];
             return (
               <div key={type} className="input-demo-item">
-                <h3>{icon} {label}</h3>
+                <h3>
+                  {icon} {label}
+                </h3>
                 <SpecificInput
                   styling={currentStyling}
                   label={label}
                   placeholder={`Enter ${label.toLowerCase()}...`}
-                  value={demoValues[type] || ''}
+                  value={demoValues[type] || ""}
                   onChange={(value: string) => handleValueChange(value, type)}
                   name={type}
                   helperText={`This is a ${type} input field`}
-                  {...(type === 'textarea' && { rows: 3 })}
-                  {...((type === 'number' || type === 'range') && { min: 0, max: 100, step: 1 })}
+                  {...(type === "textarea" && { rows: 3 })}
+                  {...((type === "number" || type === "range") && {
+                    min: 0,
+                    max: 100,
+                    step: 1,
+                  })}
+                  {...(type === "select" && {
+                    options: [
+                      { value: "option1", label: "Option 1" },
+                      { value: "option2", label: "Option 2" },
+                    ],
+                  })}                  
                 />
               </div>
             );
@@ -129,7 +160,7 @@ const InputFieldsDemo: React.FC = () => {
       <div className="demo-section">
         <h2>📏 Size Variations</h2>
         <div className="size-demo">
-          {(['sm', 'md', 'lg'] as const).map((size) => (
+          {(["sm", "md", "lg"] as const).map((size) => (
             <div key={size} className="size-demo-item">
               <InputFields
                 type="text"
@@ -137,8 +168,10 @@ const InputFieldsDemo: React.FC = () => {
                 label={`Size: ${size.toUpperCase()}`}
                 placeholder={`${size.toUpperCase()} sized input`}
                 size={size}
-                value={demoValues[`size-${size}`] || ''}
-                onChange={(value: string) => handleValueChange(value, `size-${size}`)}
+                value={demoValues[`size-${size}`] || ""}
+                onChange={(value: string) =>
+                  handleValueChange(value, `size-${size}`)
+                }
                 name={`size-${size}`}
                 icon="📝"
                 iconPosition="left"
@@ -227,8 +260,8 @@ const InputFieldsDemo: React.FC = () => {
               styling={currentStyling}
               label="Text with Counter"
               placeholder="Type something..."
-              value={demoValues['counter'] || ''}
-              onChange={(value: string) => handleValueChange(value, 'counter')}
+              value={demoValues["counter"] || ""}
+              onChange={(value: string) => handleValueChange(value, "counter")}
               name="counter"
               validation={{ maxLength: 50 }}
               showCharacterCount={true}
@@ -249,13 +282,15 @@ const InputFieldsDemo: React.FC = () => {
               styling={currentStyling}
               label="Email Address"
               placeholder="user@example.com"
-              value={demoValues['email-validation'] || ''}
-              onChange={(value: string) => handleValueChange(value, 'email-validation')}
+              value={demoValues["email-validation"] || ""}
+              onChange={(value: string) =>
+                handleValueChange(value, "email-validation")
+              }
               name="email-validation"
               required={true}
               validation={{
                 required: true,
-                custom: validateEmail
+                custom: validateEmail,
               }}
               validateOnChange={true}
               icon="📧"
@@ -271,14 +306,16 @@ const InputFieldsDemo: React.FC = () => {
               styling={currentStyling}
               label="Password"
               placeholder="Enter secure password"
-              value={demoValues['password-validation'] || ''}
-              onChange={(value: string) => handleValueChange(value, 'password-validation')}
+              value={demoValues["password-validation"] || ""}
+              onChange={(value: string) =>
+                handleValueChange(value, "password-validation")
+              }
               name="password-validation"
               required={true}
               validation={{
                 required: true,
                 minLength: 8,
-                custom: validatePassword
+                custom: validatePassword,
               }}
               validateOnChange={true}
               icon="🔒"
@@ -294,8 +331,10 @@ const InputFieldsDemo: React.FC = () => {
               styling={currentStyling}
               label="Required Field"
               placeholder="This field is required"
-              value={demoValues['required-text'] || ''}
-              onChange={(value: string) => handleValueChange(value, 'required-text')}
+              value={demoValues["required-text"] || ""}
+              onChange={(value: string) =>
+                handleValueChange(value, "required-text")
+              }
               name="required-text"
               required={true}
               validation={{ required: true }}
@@ -313,12 +352,14 @@ const InputFieldsDemo: React.FC = () => {
               styling={currentStyling}
               label="Phone Number"
               placeholder="+1 (555) 123-4567"
-              value={demoValues['phone-validation'] || ''}
-              onChange={(value: string) => handleValueChange(value, 'phone-validation')}
+              value={demoValues["phone-validation"] || ""}
+              onChange={(value: string) =>
+                handleValueChange(value, "phone-validation")
+              }
               name="phone-validation"
               validation={{
                 pattern: /^[\+]?[\d\s\(\)\-]+$/,
-                minLength: 10
+                minLength: 10,
               }}
               validateOnChange={true}
               icon="📱"
@@ -341,17 +382,25 @@ const InputFieldsDemo: React.FC = () => {
               styling={currentStyling}
               label="Controlled via Ref"
               placeholder="Use buttons below to control this input"
-              value={demoValues['ref-controlled'] || ''}
-              onChange={(value: string) => handleValueChange(value, 'ref-controlled')}
+              value={demoValues["ref-controlled"] || ""}
+              onChange={(value: string) =>
+                handleValueChange(value, "ref-controlled")
+              }
               name="ref-controlled"
               helperText="This input is controlled using imperative methods"
             />
             <div className="ref-controls">
               <button onClick={() => inputRef.current?.focus()}>Focus</button>
               <button onClick={() => inputRef.current?.clear()}>Clear</button>
-              <button onClick={() => inputRef.current?.setValue('Set by ref!')}>Set Value</button>
-              <button onClick={() => alert(inputRef.current?.getValue())}>Get Value</button>
-              <button onClick={() => inputRef.current?.validate()}>Validate</button>
+              <button onClick={() => inputRef.current?.setValue("Set by ref!")}>
+                Set Value
+              </button>
+              <button onClick={() => alert(inputRef.current?.getValue())}>
+                Get Value
+              </button>
+              <button onClick={() => inputRef.current?.validate()}>
+                Validate
+              </button>
             </div>
           </div>
 
@@ -362,8 +411,10 @@ const InputFieldsDemo: React.FC = () => {
               styling={currentStyling}
               label="Full Width Input"
               placeholder="This input takes full width of its container"
-              value={demoValues['full-width'] || ''}
-              onChange={(value: string) => handleValueChange(value, 'full-width')}
+              value={demoValues["full-width"] || ""}
+              onChange={(value: string) =>
+                handleValueChange(value, "full-width")
+              }
               name="full-width"
               fullWidth={true}
               icon="📱"
@@ -379,8 +430,10 @@ const InputFieldsDemo: React.FC = () => {
               styling={currentStyling}
               label="Comments"
               placeholder="Enter your detailed comments here..."
-              value={demoValues['large-textarea'] || ''}
-              onChange={(value: string) => handleValueChange(value, 'large-textarea')}
+              value={demoValues["large-textarea"] || ""}
+              onChange={(value: string) =>
+                handleValueChange(value, "large-textarea")
+              }
               name="large-textarea"
               rows={6}
               resize={true}
@@ -398,7 +451,8 @@ const InputFieldsDemo: React.FC = () => {
         <div className="usage-examples">
           <div className="usage-example">
             <h3>Basic Usage</h3>
-            <pre><code>{`import InputFields from '@asafarim/shared';
+            <pre>
+              <code>{`import InputFields from '@asafarim/shared';
 
 <InputFields
   type="text"
@@ -408,12 +462,14 @@ const InputFieldsDemo: React.FC = () => {
   value={value}
   onChange={setValue}
   required={true}
-/>`}</code></pre>
+/>`}</code>
+            </pre>
           </div>
 
           <div className="usage-example">
             <h3>With Validation</h3>
-            <pre><code>{`<InputFields
+            <pre>
+              <code>{`<InputFields
   type="email"
   styling="outlined"
   label="Email"
@@ -424,12 +480,14 @@ const InputFieldsDemo: React.FC = () => {
   validateOnChange={true}
   icon="📧"
   helperText="Enter a valid email"
-/>`}</code></pre>
+/>`}</code>
+            </pre>
           </div>
 
           <div className="usage-example">
             <h3>With States</h3>
-            <pre><code>{`<InputFields
+            <pre>
+              <code>{`<InputFields
   type="password"
   styling="minimal"
   label="Password"
@@ -437,7 +495,8 @@ const InputFieldsDemo: React.FC = () => {
   loading={isValidating}
   success={isValid}
   showCharacterCount={true}
-/>`}</code></pre>
+/>`}</code>
+            </pre>
           </div>
         </div>
       </div>
@@ -448,8 +507,12 @@ const InputFieldsDemo: React.FC = () => {
           🗑️ Clear All Inputs
         </button>
         <div className="demo-info">
-          <p><strong>Total Inputs:</strong> {Object.keys(demoValues).length}</p>
-          <p><strong>Current Styling:</strong> {currentStyling}</p>
+          <p>
+            <strong>Total Inputs:</strong> {Object.keys(demoValues).length}
+          </p>
+          <p>
+            <strong>Current Styling:</strong> {currentStyling}
+          </p>
         </div>
       </div>
     </div>
