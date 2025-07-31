@@ -30,7 +30,7 @@ npm install @asafarim/shared @asafarim/react-themes
 import '@asafarim/shared/dist/styles.css';
 
 // Then use components
-import { ButtonComponent, SearchItems, DDItems } from '@asafarim/shared';
+import { ButtonComponent, SearchItems, DDItems, InputFields } from '@asafarim/shared';
 ```
 
 **📖 For detailed styling instructions, see [STYLING.md](./STYLING.md)**
@@ -48,7 +48,7 @@ Explore all components with interactive examples, theme switching, and comprehen
 
 ## 🧩 Components
 
-This library currently includes four main components, each with multiple variants and comprehensive theme integration:
+This library currently includes five main components, each with multiple variants and comprehensive theme integration:
 
 | Component | Description | Styles | Status |
 |-----------|-------------|---------|--------|
@@ -56,6 +56,7 @@ This library currently includes four main components, each with multiple variant
 | **ButtonComponent** | Versatile button with 9 variants, 5 sizes | Primary, Secondary, Success, Danger, Warning, Info, Outline, Ghost, Link | ✅ Ready |
 | **SearchItems** | Flexible search input with clear functionality | Default, Compact, Outlined, Minimal | ✅ Ready |
 | **DDItems** | Dropdown/select with customizable options | Default, Compact, Outlined, Minimal | ✅ Ready |
+| **InputFields** | Comprehensive form input with 10+ input types | Default, Compact, Outlined, Minimal | ✅ Ready |
 
 ### `PackageLinks`
 A flexible, theme-aware component for displaying links to npm packages, GitHub repositories, and live demos.
@@ -223,6 +224,101 @@ interface DropdownItem {
 }
 ```
 
+### `InputFields`
+A comprehensive form input component supporting 10+ input types with validation, states, and accessibility features. Perfect for building robust forms with consistent styling.
+
+#### Usage
+```tsx
+import { InputFields } from '@asafarim/shared';
+
+function App() {
+  const [value, setValue] = useState('');
+  
+  return (
+    <div>
+      {/* Basic text input */}
+      <InputFields
+        type="text"
+        styling="default"
+        label="Full Name"
+        placeholder="Enter your name"
+        value={value}
+        onChange={setValue}
+        required={true}
+      />
+      
+      {/* Email with validation */}
+      <InputFields
+        type="email"
+        styling="outlined"
+        label="Email Address"
+        placeholder="user@example.com"
+        validation={{
+          required: true,
+          pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        }}
+        validateOnChange={true}
+        icon="📧"
+        iconPosition="left"
+        helperText="Enter a valid email address"
+      />
+      
+      {/* Textarea with character count */}
+      <InputFields
+        type="textarea"
+        styling="minimal"
+        label="Comments"
+        placeholder="Share your thoughts..."
+        rows={4}
+        validation={{ maxLength: 500 }}
+        showCharacterCount={true}
+        helperText="Maximum 500 characters"
+      />
+    </div>
+  );
+}
+```
+
+#### Props
+| Prop           | Type                                    | Default             | Description                                    |
+|----------------|-----------------------------------------|---------------------|------------------------------------------------|
+| type           | `InputFieldType`                        | `'text'`           | Input type (text, email, password, number, tel, url, search, date, time, textarea, range) |
+| styling        | `'default'` \| `'compact'` \| `'outlined'` \| `'minimal'` | `'default'` | Visual style variant |
+| label          | `string`                                | -                   | Input label text                               |
+| placeholder    | `string`                                | -                   | Placeholder text                               |
+| value          | `string`                                | -                   | Input value (controlled)                       |
+| onChange       | `(value: string, name?: string) => void` | -                 | Change handler function                        |
+| validation     | `ValidationRule`                        | -                   | Validation configuration                       |
+| error          | `string`                                | -                   | Error message to display                       |
+| success        | `boolean`                               | `false`             | Success state styling                          |
+| loading        | `boolean`                               | `false`             | Loading state with spinner                     |
+| disabled       | `boolean`                               | `false`             | Disabled state                                 |
+| readOnly       | `boolean`                               | `false`             | Read-only state                                |
+| required       | `boolean`                               | `false`             | Required field indicator                       |
+| size           | `'sm'` \| `'md'` \| `'lg'`             | `'md'`              | Input size                                     |
+| icon           | `React.ReactNode`                       | -                   | Icon element                                   |
+| iconPosition   | `'left'` \| `'right'`                  | `'left'`            | Icon position                                  |
+| helperText     | `string`                                | -                   | Helper text below input                        |
+| showCharacterCount | `boolean`                           | `false`             | Show character counter                         |
+
+#### InputFieldType
+```tsx
+type InputFieldType = 
+  | 'text' | 'email' | 'password' | 'number' | 'tel' 
+  | 'url' | 'search' | 'date' | 'time' | 'textarea' | 'range';
+```
+
+#### ValidationRule Interface
+```tsx
+interface ValidationRule {
+  required?: boolean;
+  minLength?: number;
+  maxLength?: number;
+  pattern?: RegExp;
+  custom?: (value: string) => string | null;
+}
+```
+
 ---
 
 ## 🎨 Theme Integration
@@ -334,7 +430,8 @@ shared/
 │   │   ├── Button/     # ButtonComponent
 │   │   ├── Links/      # PackageLinks
 │   │   ├── SearchBox/  # SearchItems
-│   │   └── Dropdowns/  # DDItems
+│   │   ├── Dropdowns/  # DDItems
+│   │   └── Inputs/     # InputFields
 │   ├── styles/     # Global CSS variables and theme system
 │   ├── index.ts    # Entry point
 │   └── types.d.ts  # TypeScript definitions
@@ -345,7 +442,8 @@ shared/
 │   │   │   ├── PackageLinksDemo.tsx
 │   │   │   ├── ButtonComponentDemo.tsx
 │   │   │   ├── SearchItemsDemo.tsx
-│   │   │   └── DDItemsDemo.tsx
+│   │   │   ├── DDItemsDemo.tsx
+│   │   │   └── InputFieldsDemo.tsx
 │   │   └── pages/
 │   └── dist/       # Built demo
 ├── dist/           # Built library
@@ -409,7 +507,8 @@ import {
   PackageLinks,      // Link display component
   ButtonComponent,   // Versatile button with variants
   SearchItems,       // Search input with styles
-  DDItems           // Dropdown/select component
+  DDItems,          // Dropdown/select component
+  InputFields       // Comprehensive form input with 10+ types
 } from '@asafarim/shared';
 ```
 
@@ -419,6 +518,8 @@ import {
 function ContactForm() {
   const [search, setSearch] = useState('');
   const [category, setCategory] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
   
   return (
     <form>
@@ -437,6 +538,26 @@ function ContactForm() {
         placeholder="Select category"
       />
       
+      <InputFields
+        type="email"
+        styling="outlined"
+        label="Email Address"
+        value={email}
+        onChange={setEmail}
+        placeholder="your@email.com"
+        required={true}
+      />
+      
+      <InputFields
+        type="textarea"
+        styling="outlined"
+        label="Message"
+        value={message}
+        onChange={setMessage}
+        placeholder="Your message..."
+        rows={4}
+      />
+      
       <ButtonComponent 
         type="submit" 
         variant="primary"
@@ -452,4 +573,5 @@ function ContactForm() {
 ### Style Variants Quick Reference
 - **Button Variants**: `primary`, `secondary`, `success`, `danger`, `warning`, `info`, `outline`, `ghost`, `link`
 - **Button Sizes**: `xs`, `sm`, `md`, `lg`, `xl`
-- **Search/Dropdown Types**: `default`, `compact`, `outlined`, `minimal`
+- **Search/Dropdown/Input Types**: `default`, `compact`, `outlined`, `minimal`
+- **Input Field Types**: `text`, `email`, `password`, `number`, `tel`, `url`, `search`, `date`, `time`, `textarea`, ...

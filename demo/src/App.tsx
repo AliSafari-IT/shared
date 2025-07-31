@@ -10,6 +10,7 @@ import PackageLinksDemo from "./components/PackageLinksDemo";
 import ButtonComponentDemo from "./components/ButtonComponentDemo";
 import SearchItemsDemo from "./components/SearchItemsDemo";
 import DDItemsDemo from "./components/DDItemsDemo";
+import InputFieldsDemo from "./components/InputFieldsDemo";
 import { ThemeToggle } from "@asafarim/react-themes";
 
 // Embed the SVG directly to avoid path resolution issues
@@ -77,6 +78,12 @@ function Navigation() {
       >
         Dropdown
       </Link>
+      <Link
+        to="/input-fields"
+        className={`nav-link ${isActive("/input-fields") ? "active" : ""}`}
+      >
+        InputFields
+      </Link>
     </nav>
   );
 }
@@ -113,6 +120,7 @@ function App() {
             <Route path="/button-component" element={<ButtonComponentDemo />} />
             <Route path="/search-box" element={<SearchItemsDemo  />} />
             <Route path="/dropdown" element={<DDItemsDemo />} />
+            <Route path="/input-fields" element={<InputFieldsDemo />} />
             {/* Add more routes as needed */}
           </Routes>
         </main>

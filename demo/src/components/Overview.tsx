@@ -10,7 +10,7 @@ export default function Overview() {
         <h2 className="demo-title">Welcome to @asafarim/shared</h2>
         <div className="demo-description">
           <p>
-            This is a collection of reusable React components and utilities
+            This is a collection of five reusable React components and utilities
             designed for ASafariM web applications. Each component is built with
             TypeScript and follows modern React best practices.
           </p>
@@ -97,6 +97,14 @@ export default function Overview() {
                 <td>✅ Yes</td>
                 <td>✅ Ready</td>
               </tr>
+              <tr>
+                <td>InputFields</td>
+                <td>
+                  Comprehensive form input component supporting 10 input types with validation and states
+                </td>
+                <td>✅ Yes</td>
+                <td>✅ Ready</td>
+              </tr>
             </tbody>
           </table>
         </div>
@@ -160,19 +168,68 @@ pnpm add @asafarim/shared @asafarim/react-themes`}</pre>
       <div className="demo-section">
         <h3 className="demo-title">Basic Usage with Themes</h3>
         <div className="demo-code">
-          <pre>{`import React from 'react';
+          <pre>{`import React, { useState } from 'react';
 import { ThemeProvider } from '@asafarim/react-themes';
-import { PackageLinks } from '@asafarim/shared';
+import { 
+  PackageLinks, 
+  ButtonComponent, 
+  SearchItems, 
+  DDItems, 
+  InputFields 
+} from '@asafarim/shared';
 import '@asafarim/react-themes/styles.css';
 
 function App() {
+  const [search, setSearch] = useState('');
+  const [category, setCategory] = useState('');
+  const [email, setEmail] = useState('');
+
+  const options = [
+    { value: 'react', label: 'React' },
+    { value: 'vue', label: 'Vue.js' },
+    { value: 'angular', label: 'Angular' }
+  ];
+
   return (
     <ThemeProvider defaultMode="auto" persistMode={true}>
-      <PackageLinks 
-        packageName="@asafarim/display-code" 
-        githubPath="packages/display-code" 
-        demoPath="packages/display-code" 
-      />
+      <div>
+        <PackageLinks 
+          packageName="@asafarim/shared" 
+          githubPath="https://github.com/AliSafari-IT/shared" 
+          demoPath="https://alisafari-it.github.io/shared/" 
+        />
+        
+        <SearchItems
+          searchTerm={search}
+          onSearchChange={setSearch}
+          searchType="outlined"
+          placeholder="Search components..."
+        />
+        
+        <DDItems
+          selectedValue={category}
+          onValueChange={setCategory}
+          items={options}
+          dropdownType="outlined"
+          placeholder="Select framework..."
+        />
+        
+        <InputFields
+          type="email"
+          styling="outlined"
+          label="Email Address"
+          value={email}
+          onChange={setEmail}
+          placeholder="your@email.com"
+          required={true}
+          icon="📧"
+          iconPosition="left"
+        />
+        
+        <ButtonComponent variant="primary" size="lg">
+          Get Started
+        </ButtonComponent>
+      </div>
     </ThemeProvider>
   );
 }`}</pre>
