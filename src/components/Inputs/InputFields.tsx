@@ -340,6 +340,17 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
         );
       }
 
+        if (type === "checkbox" || type === "radio") {
+        return (
+          <input
+            {...commonProps}
+            type={type}
+            checked={currentValue === "true" || currentValue === "on"}
+            onChange={(e) => handleChange({ target: { value: e.target.checked.toString() } } as any)}
+          />
+        );
+      }
+
       return (<input {...commonProps} type={type} min={min} max={max} step={step} />);
     };
 

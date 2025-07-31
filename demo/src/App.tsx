@@ -28,8 +28,8 @@ const SharedDemoLogo = () => (
       <path
         d="M24 12v24M12 24h24"
         stroke="#fff"
-        stroke-width="2.5"
-        stroke-linecap="round"
+        strokeWidth="2.5"
+        strokeLinecap="round"
       />
       <circle cx="24" cy="24" r="6" fill="#fff" />
       <circle cx="24" cy="24" r="3" fill="#4dabf7" />
