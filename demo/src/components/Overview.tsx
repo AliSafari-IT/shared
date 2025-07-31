@@ -214,14 +214,13 @@ function App() {
           placeholder="Select framework..."
         />
         
-        <InputFields
-          type="email"
+        <InputFields.Email
           styling="outlined"
           label="Email Address"
           value={email}
           onChange={setEmail}
           placeholder="your@email.com"
-          required={true}
+          required
           icon="📧"
           iconPosition="left"
         />

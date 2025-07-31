@@ -103,7 +103,8 @@ export interface InputFieldsRef {
   setValue: (value: string) => void;
 }
 
-const InputFields = forwardRef<InputFieldsRef, InputFieldsProps>(({
+// Base implementation as internal component
+const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(({   
   type = 'text',
   styling = 'default',
   label,
@@ -375,6 +376,97 @@ const InputFields = forwardRef<InputFieldsRef, InputFieldsProps>(({
   );
 });
 
-InputFields.displayName = 'InputFields';
+// Display name for React DevTools
+BaseInputFields.displayName = 'InputFields';
+
+// Create type-specific wrappers
+const Text = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="text" />
+));
+const Email = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="email" />
+));
+const Password = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="password" />
+));
+const NumberField = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="number" />
+));
+const Range = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="range" />
+));
+const Textarea = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="textarea" />
+));
+
+const Tel = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="tel" />
+));
+const Url = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="url" />
+));
+const Search = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="search" />
+));
+const DateField = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="date" />
+));
+const TimeField = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="time" />
+));
+const SelectField = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="select" />
+));
+const CheckboxField = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="checkbox" />
+));
+const RadioField = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="radio" />
+));
+const FileField = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="file" />
+));
+const HiddenField = React.forwardRef<InputFieldsRef, InputFieldsProps>((props, ref) => (
+  <BaseInputFields {...props} ref={ref} type="hidden" />
+));
+
+// Compose final exported component with static properties
+interface ExtendedInputFields extends React.ForwardRefExoticComponent<
+  InputFieldsProps & React.RefAttributes<InputFieldsRef>
+> {
+  Text: typeof Text;
+  Email: typeof Email;
+  Password: typeof Password;
+  Number: typeof NumberField;
+  Range: typeof Range;
+  Textarea: typeof Textarea;
+  Tel: typeof Tel;
+  Url: typeof Url;
+  Search: typeof Search;
+  Date: typeof DateField;
+  Time: typeof TimeField;
+  Select: typeof SelectField;
+  Checkbox: typeof CheckboxField;
+  Radio: typeof RadioField;
+  File: typeof FileField;
+  Hidden: typeof HiddenField;
+}
+const InputFields = BaseInputFields as ExtendedInputFields;
+InputFields.Text = Text;
+InputFields.Email = Email;
+InputFields.Password = Password;
+InputFields.Number = NumberField;
+InputFields.Range = Range;
+InputFields.Textarea = Textarea;
+InputFields.Tel = Tel;
+InputFields.Url = Url;
+InputFields.Search = Search;
+InputFields.Date = DateField;
+InputFields.Time = TimeField;
+InputFields.Select = SelectField;
+InputFields.Checkbox = CheckboxField;
+InputFields.Radio = RadioField;
+InputFields.File = FileField;
+InputFields.Hidden = HiddenField;
 
 export default InputFields;

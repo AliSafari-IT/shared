@@ -53,6 +53,26 @@ const InputFieldsDemo: React.FC = () => {
 
   const stylingTypes: InputStylingType[] = ['default', 'compact', 'outlined', 'minimal'];
 
+  // Map each input type to its static subcomponent
+  const inputComponents: Record<InputFieldType, React.ForwardRefExoticComponent<any>> = {
+    text: InputFields.Text,
+    email: InputFields.Email,
+    password: InputFields.Password,
+    number: InputFields.Number,
+    range: InputFields.Range,
+    tel: InputFields.Tel,
+    url: InputFields.Url,
+    search: InputFields.Search,
+    date: InputFields.Date,
+    time: InputFields.Time,
+    textarea: InputFields.Textarea,
+    select: InputFields.Select,
+    checkbox: InputFields.Checkbox,
+    radio: InputFields.Radio,
+    file: InputFields.File,
+    hidden: InputFields.Hidden
+  };
+
   return (
     <div className="input-fields-demo">
       <div className="demo-header">
@@ -83,24 +103,25 @@ const InputFieldsDemo: React.FC = () => {
       <div className="demo-section">
         <h2>🔧 All Input Types</h2>
         <div className="inputs-grid">
-          {inputTypes.map(({ type, label, icon }) => (
-            <div key={type} className="input-demo-item">
-              <h3>{icon} {label}</h3>
-              <InputFields
-                type={type}
-                styling={currentStyling}
-                label={label}
-                placeholder={`Enter ${label.toLowerCase()}...`}
-                value={demoValues[type] || ''}
-                onChange={(value: string) => handleValueChange(value, type)}
-                name={type}
-                helperText={`This is a ${type} input field`}
-                {...(type === 'textarea' && { rows: 3 })}
-                {...(type === 'number' && { min: 0, max: 100, step: 1 })}
-                {...(type === 'range' && { min: 0, max: 100, step: 1 })}
-              />
-            </div>
-          ))}
+          {inputTypes.map(({ type, label, icon }) => {
+            const SpecificInput = inputComponents[type];
+            return (
+              <div key={type} className="input-demo-item">
+                <h3>{icon} {label}</h3>
+                <SpecificInput
+                  styling={currentStyling}
+                  label={label}
+                  placeholder={`Enter ${label.toLowerCase()}...`}
+                  value={demoValues[type] || ''}
+                  onChange={(value: string) => handleValueChange(value, type)}
+                  name={type}
+                  helperText={`This is a ${type} input field`}
+                  {...(type === 'textarea' && { rows: 3 })}
+                  {...((type === 'number' || type === 'range') && { min: 0, max: 100, step: 1 })}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
 

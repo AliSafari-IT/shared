@@ -228,56 +228,69 @@ interface DropdownItem {
 A comprehensive form input component supporting 10+ input types with validation, states, and accessibility features. Perfect for building robust forms with consistent styling.
 
 #### Usage
+Demonstrating both the generic `InputFields` API and static subcomponents:
 ```tsx
+import React, { useState } from 'react';
 import { InputFields } from '@asafarim/shared';
 
 function App() {
-  const [value, setValue] = useState('');
-  
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [comments, setComments] = useState('');
+  const [volume, setVolume] = useState('50');
+
   return (
     <div>
-      {/* Basic text input */}
+      {/* Generic API */}
       <InputFields
         type="text"
         styling="default"
         label="Full Name"
         placeholder="Enter your name"
-        value={value}
-        onChange={setValue}
-        required={true}
+        value={name}
+        onChange={setName}
+        required
       />
-      
-      {/* Email with validation */}
-      <InputFields
-        type="email"
+
+      {/* Static subcomponents */}
+      <InputFields.Email
         styling="outlined"
         label="Email Address"
         placeholder="user@example.com"
-        validation={{
-          required: true,
-          pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/
-        }}
-        validateOnChange={true}
+        value={email}
+        onChange={setEmail}
+        validation={{ required: true, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ }}
+        validateOnChange
         icon="📧"
         iconPosition="left"
         helperText="Enter a valid email address"
       />
-      
-      {/* Textarea with character count */}
-      <InputFields
-        type="textarea"
+
+      <InputFields.Textarea
         styling="minimal"
         label="Comments"
         placeholder="Share your thoughts..."
+        value={comments}
+        onChange={setComments}
         rows={4}
         validation={{ maxLength: 500 }}
-        showCharacterCount={true}
+        showCharacterCount
         helperText="Maximum 500 characters"
+      />
+
+      <InputFields.Range
+        styling="default"
+        label="Volume"
+        min={0}
+        max={100}
+        step={1}
+        value={volume}
+        onChange={setVolume}
       />
     </div>
   );
 }
-```
+```   
 
 #### Props
 | Prop           | Type                                    | Default             | Description                                    |
