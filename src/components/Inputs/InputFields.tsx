@@ -451,9 +451,54 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
           />
         );
       }
-
+      if (type === "file") {
+        // File inputs cannot be controlled with a non-empty value
+        const { value: _omitValue, ...fileProps } = commonProps as any;
+        return (
+          <input
+            {...fileProps}
+            ref={inputRef as any}
+            className={inputClasses}
+            type="file"
+            accept={accept}
+            multiple={multiple}
+          />
+        );
+      }
+      // For reset, button, and submit, use a <button> to display text
+      if (type === "reset" || type === "button" || type === "submit") {
+        const buttonText = label || type.charAt(0).toUpperCase() + type.slice(1);
+        // Omit non-button-specific props
+        const {
+          value: _omitValue,
+          onChange: _omitChange,
+          placeholder: _omitPlaceholder,
+          min: _omitMin,
+          max: _omitMax,
+          step: _omitStep,
+          accept: _omitAccept,
+          multiple: _omitMultiple,
+          ...buttonProps
+        } = commonProps as any;
+        return (
+          <button
+            {...buttonProps}
+            type={type}
+            className={inputClasses}
+          >
+            {buttonText}
+          </button>
+        );
+      }
+      // Default input rendering
       return (
-        <input {...commonProps} type={type} min={min} max={max} step={step} />
+        <input
+          {...commonProps}
+          type={type}
+          min={min}
+          max={max}
+          step={step}
+        />
       );
     };
 
@@ -464,7 +509,8 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
 
     return (
       <div className={containerClasses} style={style}>
-        {label && (
+        {/* Skip top label for reset/button/submit since the button shows its own text */}
+        {label && type !== "reset" && type !== "button" && type !== "submit" && (
           <label htmlFor={id || name} className="input-field-label">
             {label}
             {required && <span className="input-field-required">*</span>}
