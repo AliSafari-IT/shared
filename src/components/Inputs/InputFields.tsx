@@ -379,6 +379,31 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
       .filter(Boolean)
       .join(" ");
 
+    // Filter out non-DOM props that shouldn't be passed to input elements
+    const {
+      helperText: _helperText,
+      showCharacterCount: _showCharacterCount,
+      validation: _validation,
+      validateOnChange: _validateOnChange,
+      validateOnBlur: _validateOnBlur,
+      resize: _resize,
+      isMulti: _isMulti,
+      color: _color,
+      reset: _reset,
+      button: _button,
+      submit: _submit,
+      error: _error,
+      success: _success,
+      loading: _loading,
+      fullWidth: _fullWidth,
+      icon: _icon,
+      iconPosition: _iconPosition,
+      size: _size,
+      styling: _styling,
+      onCheckboxChange: _onCheckboxChange,
+      ...domProps
+    } = rest;
+
     // Common input props
     const commonProps = {
       ref: inputRef as any,
@@ -403,8 +428,8 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
         : helperText
         ? `${id || name}-helper`
         : undefined,
-        // Additional HTML attributes
-      ...rest,
+        // Only spread DOM-safe props
+      ...domProps,
     };
 
     // Render input element based on type
@@ -447,7 +472,7 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
             name={name}
             id={id || name}
             autoFocus={autoFocus}
-            {...rest}
+            {...domProps}
           />
         );
       }
@@ -664,6 +689,17 @@ interface SwitchProps extends Omit<InputFieldsProps, 'value' | 'onChange'> {
 }
 const SwitchComponent = forwardRef<InputFieldsRef, SwitchProps>(
   ({ checked = false, onChange, onLabel = 'On', offLabel = 'Off', styling = 'default', size = 'md', ...rest }, ref) => {
+    // Filter out non-DOM props for the switch input
+    const {
+      helperText: _helperText,
+      error: _error,
+      label: _label,
+      fullWidth: _fullWidth,
+      className: _className,
+      required: _required,
+      ...switchDomProps
+    } = rest;
+
     const containerClasses = [
       "input-field-container",
       `input-field-${styling}`,
@@ -691,7 +727,7 @@ const SwitchComponent = forwardRef<InputFieldsRef, SwitchProps>(
             disabled={rest.disabled}
             name={rest.name}
             id={rest.id || rest.name}
-            {...rest}
+            {...switchDomProps}
           />
           <span className="input-field-switch-label">
             {checked ? onLabel : offLabel}

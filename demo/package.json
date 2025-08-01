@@ -1,6 +1,6 @@
 {
   "name": "shared-demo",
-  "version": "1.6.0",
+  "version": "1.6.1",
   "description": "Demo application showcasing @asafarim/shared components",
   "private": true,
   "type": "module",

@@ -675,3 +675,200 @@
     transition: none;
   }
 }
+
+/* Missing Input Field Classes */
+
+/* Multi-select styling */
+.input-field-multi select {
+  height: auto;
+  min-height: calc(var(--theme-spacing-md) * 2 + 1rem);
+}
+
+/* File input accept attribute styling */
+.input-field-accept input[type="file"] {
+  cursor: pointer;
+}
+
+.input-field-accept input[type="file"]:hover {
+  background-color: var(--theme-color-background-hover);
+}
+
+/* Multiple file selection styling */
+.input-field-multiple input[type="file"] {
+  padding: var(--theme-spacing-sm);
+}
+
+.input-field-multiple input[type="file"]::file-selector-button {
+  margin-right: var(--theme-spacing-sm);
+  background-color: var(--theme-color-primary);
+  color: var(--theme-color-background);
+  border: none;
+  padding: var(--theme-spacing-xs) var(--theme-spacing-sm);
+  border-radius: var(--theme-radius-sm);
+  font-size: var(--theme-font-size-sm);
+  cursor: pointer;
+  transition: background-color var(--theme-transition-fast);
+}
+
+.input-field-multiple input[type="file"]::file-selector-button:hover {
+  background-color: var(--theme-color-primary-hover);
+}
+
+/* Checked state styling for checkboxes and radios */
+.input-field-checked input[type="checkbox"],
+.input-field-checked input[type="radio"] {
+  accent-color: var(--theme-color-primary);
+}
+
+.input-field-checked input[type="checkbox"]:checked,
+.input-field-checked input[type="radio"]:checked {
+  background-color: var(--theme-color-primary);
+  border-color: var(--theme-color-primary);
+}
+
+/* Color input styling */
+.input-field-color input[type="color"] {
+  width: 60px;
+  height: 40px;
+  border: 2px solid var(--theme-color-border);
+  border-radius: var(--theme-radius-sm);
+  cursor: pointer;
+  padding: 0;
+  background: none;
+}
+
+.input-field-color input[type="color"]:hover {
+  border-color: var(--theme-color-primary);
+  box-shadow: 0 0 0 3px var(--theme-color-primary-alpha);
+}
+
+.input-field-color input[type="color"]:focus {
+  outline: none;
+  border-color: var(--theme-color-primary);
+  box-shadow: 0 0 0 3px var(--theme-color-primary-alpha);
+}
+
+/* Button type inputs (reset, button, submit) */
+.input-field-reset button,
+.input-field-button button,
+.input-field-submit button {
+  background-color: var(--theme-color-background);
+  color: var(--theme-color-text);
+  border: 2px solid var(--theme-color-border);
+  border-radius: var(--theme-radius-md);
+  padding: var(--theme-spacing-sm) var(--theme-spacing-md);
+  font-size: var(--theme-font-size-base);
+  font-weight: var(--theme-font-weight-medium);
+  cursor: pointer;
+  transition: all var(--theme-transition-fast);
+  min-width: 100px;
+}
+
+.input-field-reset button:hover,
+.input-field-button button:hover {
+  background-color: var(--theme-color-background-hover);
+  border-color: var(--theme-color-primary);
+}
+
+.input-field-submit button {
+  background-color: var(--theme-color-primary);
+  color: var(--theme-color-background);
+  border-color: var(--theme-color-primary);
+}
+
+.input-field-submit button:hover {
+  background-color: var(--theme-color-primary-hover);
+  border-color: var(--theme-color-primary-hover);
+}
+
+.input-field-reset button:focus,
+.input-field-button button:focus,
+.input-field-submit button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--theme-color-primary-alpha);
+}
+
+.input-field-reset button:active,
+.input-field-button button:active,
+.input-field-submit button:active {
+  transform: translateY(1px);
+}
+
+/* Disabled button states */
+.input-field-disabled .input-field-reset button,
+.input-field-disabled .input-field-button button,
+.input-field-disabled .input-field-submit button {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background-color: var(--theme-color-background-disabled);
+  color: var(--theme-color-text-disabled);
+  border-color: var(--theme-color-border-disabled);
+}
+
+.input-field-disabled .input-field-reset button:hover,
+.input-field-disabled .input-field-button button:hover,
+.input-field-disabled .input-field-submit button:hover {
+  background-color: var(--theme-color-background-disabled);
+  border-color: var(--theme-color-border-disabled);
+  transform: none;
+}
+
+/* Button sizing variants */
+.input-field-size-sm .input-field-reset button,
+.input-field-size-sm .input-field-button button,
+.input-field-size-sm .input-field-submit button {
+  padding: var(--theme-spacing-xs) var(--theme-spacing-sm);
+  font-size: var(--theme-font-size-sm);
+  min-width: 80px;
+}
+
+.input-field-size-lg .input-field-reset button,
+.input-field-size-lg .input-field-button button,
+.input-field-size-lg .input-field-submit button {
+  padding: var(--theme-spacing-md) var(--theme-spacing-lg);
+  font-size: var(--theme-font-size-lg);
+  min-width: 120px;
+}
+
+/* Styling variants for buttons */
+.input-field-compact .input-field-reset button,
+.input-field-compact .input-field-button button,
+.input-field-compact .input-field-submit button {
+  padding: var(--theme-spacing-xs) var(--theme-spacing-sm);
+  border-radius: var(--theme-radius-sm);
+}
+
+.input-field-outlined .input-field-reset button,
+.input-field-outlined .input-field-button button {
+  background-color: transparent;
+  border: 2px solid var(--theme-color-primary);
+  color: var(--theme-color-primary);
+}
+
+.input-field-outlined .input-field-reset button:hover,
+.input-field-outlined .input-field-button button:hover {
+  background-color: var(--theme-color-primary-alpha);
+}
+
+.input-field-outlined .input-field-submit button {
+  background-color: var(--theme-color-primary);
+  color: var(--theme-color-background);
+}
+
+.input-field-minimal .input-field-reset button,
+.input-field-minimal .input-field-button button,
+.input-field-minimal .input-field-submit button {
+  border: none;
+  background-color: transparent;
+  color: var(--theme-color-primary);
+  text-decoration: underline;
+  min-width: auto;
+  padding: var(--theme-spacing-xs);
+}
+
+.input-field-minimal .input-field-reset button:hover,
+.input-field-minimal .input-field-button button:hover,
+.input-field-minimal .input-field-submit button:hover {
+  background-color: var(--theme-color-primary-alpha);
+  text-decoration: none;
+}

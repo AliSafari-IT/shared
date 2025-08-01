@@ -160,9 +160,13 @@
   --theme-color-secondary: var(--secondary-color-light);
   --theme-color-text: var(--text-color-light);
   --theme-color-text-secondary: var(--text-secondary-light);
+  --theme-color-text-disabled: #9ca3af;
   --theme-color-background: var(--bg-color-light);
   --theme-color-background-secondary: var(--bg-secondary-light);
+  --theme-color-background-hover: var(--hover-bg-light);
+  --theme-color-background-disabled: #f3f4f6;
   --theme-color-border: var(--border-color-light);
+  --theme-color-border-disabled: #d1d5db;
   --theme-color-success: var(--success-color-light);
   --theme-color-error: var(--error-color-light);
   --theme-color-warning: var(--warning-color-light);
@@ -204,9 +208,13 @@
   --theme-color-secondary: var(--secondary-color-dark);
   --theme-color-text: var(--text-color-dark);
   --theme-color-text-secondary: var(--text-secondary-dark);
+  --theme-color-text-disabled: #6b7280;
   --theme-color-background: var(--bg-color-dark);
   --theme-color-background-secondary: var(--bg-secondary-dark);
+  --theme-color-background-hover: var(--hover-bg-dark);
+  --theme-color-background-disabled: #374151;
   --theme-color-border: var(--border-color-dark);
+  --theme-color-border-disabled: #4b5563;
   --theme-color-success: var(--success-color-dark);
   --theme-color-error: var(--error-color-dark);
   --theme-color-warning: var(--warning-color-dark);
