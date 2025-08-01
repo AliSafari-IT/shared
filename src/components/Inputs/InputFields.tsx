@@ -346,13 +346,22 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
         );
       }
 
-        if (type === "checkbox" || type === "radio") {
+      if (type === "checkbox" || type === "radio") {
+        const isChecked = currentValue === "true" || currentValue === "on";
         return (
           <input
-            {...commonProps}
+            ref={inputRef as any}
+            className={inputClasses}
             type={type}
-            checked={currentValue === "true" || currentValue === "on"}
+            checked={isChecked}
             onChange={(e) => handleChange({ target: { value: e.target.checked.toString() } } as any)}
+            disabled={disabled}
+            readOnly={readOnly}
+            required={required}
+            name={name}
+            id={id || name}
+            autoFocus={autoFocus}
+            {...rest}
           />
         );
       }

@@ -132,9 +132,18 @@ const InputFieldsDemo: React.FC = () => {
                 <SpecificInput
                   styling={currentStyling}
                   label={label}
-                  placeholder={`Enter ${label.toLowerCase()}...`}
-                  value={demoValues[type] || ""}
-                  onChange={(value: string) => handleValueChange(value, type)}
+                placeholder={`Enter ${label.toLowerCase()}...`}
+                {...(
+                  type === "checkbox"
+                    ? {
+                        checked: demoValues[type] === "true",
+                        onChange: (checked: boolean) => handleValueChange(checked, type),
+                      }
+                    : {
+                        value: demoValues[type] || "",
+                        onChange: (value: string) => handleValueChange(value, type),
+                      }
+                )}
                   name={type}
                   helperText={`This is a ${type} input field`}
                   {...(type === "textarea" && { rows: 3 })}
