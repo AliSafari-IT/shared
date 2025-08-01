@@ -655,6 +655,70 @@ const SubmitField = React.forwardRef<InputFieldsRef, InputFieldsProps>(
 );
 SubmitField.displayName = "InputFields.Submit";
 
+// Switch / Toggle components: a styled checkbox with on/off labels
+interface SwitchProps extends Omit<InputFieldsProps, 'value' | 'onChange'> {
+  checked?: boolean;
+  onChange?: (checked: boolean, name?: string) => void;
+  onLabel?: string;
+  offLabel?: string;
+}
+const SwitchComponent = forwardRef<InputFieldsRef, SwitchProps>(
+  ({ checked = false, onChange, onLabel = 'On', offLabel = 'Off', styling = 'default', size = 'md', ...rest }, ref) => {
+    const containerClasses = [
+      "input-field-container",
+      `input-field-${styling}`,
+      `input-field-size-${size}`,
+      rest.fullWidth ? "input-field-full-width" : "",
+      rest.disabled ? "input-field-disabled" : "",
+      rest.className || ""
+    ].filter(Boolean).join(" ");
+
+    return (
+      <div className={containerClasses}>
+        {rest.label && (
+          <label htmlFor={rest.id || rest.name} className="input-field-label">
+            {rest.label}
+            {rest.required && <span className="input-field-required">*</span>}
+          </label>
+        )}
+        <div className="input-field-switch-wrapper">
+          <input
+            ref={ref as any}
+            type="checkbox"
+            className={`input-field-switch input-field-${styling} input-field-size-${size}`}
+            checked={checked}
+            onChange={(e) => onChange?.(e.target.checked, rest.name)}
+            disabled={rest.disabled}
+            name={rest.name}
+            id={rest.id || rest.name}
+            {...rest}
+          />
+          <span className="input-field-switch-label">
+            {checked ? onLabel : offLabel}
+          </span>
+        </div>
+        {(rest.error || rest.helperText) && (
+          <div className="input-field-footer">
+            {rest.error && (
+              <div className="input-field-error-text" role="alert">
+                {rest.error}
+              </div>
+            )}
+            {!rest.error && rest.helperText && (
+              <div className="input-field-helper-text">
+                {rest.helperText}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+);
+SwitchComponent.displayName = 'InputFields.Switch';
+const ToggleComponent = SwitchComponent;
+ToggleComponent.displayName = 'InputFields.Toggle';
+
 // Compose final exported component with static properties
 interface ExtendedInputFields
   extends React.ForwardRefExoticComponent<
@@ -680,6 +744,8 @@ interface ExtendedInputFields
   Reset: typeof ResetField;
   Button: typeof ButtonField;
   Submit: typeof SubmitField;
+  Switch: typeof SwitchComponent;
+  Toggle: typeof ToggleComponent;
 }
 const InputFields = BaseInputFields as ExtendedInputFields;
 InputFields.Text = Text;
@@ -702,5 +768,7 @@ InputFields.Color = ColorField;
 InputFields.Reset = ResetField;
 InputFields.Button = ButtonField;
 InputFields.Submit = SubmitField;
+InputFields.Switch = SwitchComponent;
+InputFields.Toggle = ToggleComponent;
 
 export default InputFields;

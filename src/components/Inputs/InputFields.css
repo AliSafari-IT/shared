@@ -499,3 +499,179 @@
   padding-top: var(--theme-spacing-4);
   padding-bottom: var(--theme-spacing-4);
 }
+
+/* Switch/Toggle Component Styles */
+.input-field-switch-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--theme-spacing-3);
+  cursor: pointer;
+  user-select: none;
+}
+
+.input-field-switch {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  width: 44px !important;
+  height: 24px !important;
+  background-color: var(--theme-color-border) !important;
+  border-radius: 12px !important;
+  position: relative !important;
+  cursor: pointer !important;
+  transition: all var(--theme-transition-fast) !important;
+  border: none !important;
+  outline: none !important;
+  min-height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.input-field-switch:checked {
+  background-color: var(--theme-color-primary) !important;
+}
+
+.input-field-switch::before {
+  content: '' !important;
+  position: absolute !important;
+  width: 20px !important;
+  height: 20px !important;
+  border-radius: 50% !important;
+  background-color: white !important;
+  top: 2px !important;
+  left: 2px !important;
+  transition: all var(--theme-transition-fast) !important;
+  box-shadow: var(--theme-shadow-sm) !important;
+}
+
+.input-field-switch:checked::before {
+  transform: translateX(20px) !important;
+}
+
+.input-field-switch:focus-visible {
+  outline: 2px solid var(--theme-color-primary);
+  outline-offset: 2px;
+}
+
+.input-field-switch:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input-field-switch-label {
+  font-size: var(--theme-font-size-sm);
+  color: var(--theme-color-text);
+  font-weight: var(--theme-font-weight-medium);
+  transition: color var(--theme-transition-fast);
+}
+
+/* Size variants for switches */
+.input-field-size-sm .input-field-switch {
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+}
+
+.input-field-size-sm .input-field-switch::before {
+  width: 16px;
+  height: 16px;
+  top: 2px;
+  left: 2px;
+}
+
+.input-field-size-sm .input-field-switch:checked::before {
+  transform: translateX(16px);
+}
+
+.input-field-size-lg .input-field-switch {
+  width: 52px;
+  height: 28px;
+  border-radius: 14px;
+}
+
+.input-field-size-lg .input-field-switch::before {
+  width: 24px;
+  height: 24px;
+  top: 2px;
+  left: 2px;
+}
+
+.input-field-size-lg .input-field-switch:checked::before {
+  transform: translateX(24px);
+}
+
+/* Styling variants for switches */
+.input-field-outlined .input-field-switch {
+  border: 2px solid var(--theme-color-border);
+  background-color: var(--theme-color-background);
+}
+
+.input-field-outlined .input-field-switch:checked {
+  border-color: var(--theme-color-primary);
+  background-color: var(--theme-color-primary);
+}
+
+.input-field-minimal .input-field-switch {
+  background-color: transparent;
+  border: 2px solid var(--theme-color-border);
+}
+
+.input-field-minimal .input-field-switch:checked {
+  background-color: transparent;
+  border-color: var(--theme-color-primary);
+}
+
+.input-field-minimal .input-field-switch::before {
+  background-color: var(--theme-color-primary);
+  opacity: 0;
+}
+
+.input-field-minimal .input-field-switch:checked::before {
+  opacity: 1;
+}
+
+.input-field-compact .input-field-switch {
+  width: 40px;
+  height: 22px;
+  border-radius: 11px;
+}
+
+.input-field-compact .input-field-switch::before {
+  width: 18px;
+  height: 18px;
+  top: 2px;
+  left: 2px;
+}
+
+.input-field-compact .input-field-switch:checked::before {
+  transform: translateX(18px);
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .input-field-switch {
+  background-color: var(--theme-color-background-secondary);
+}
+
+[data-theme="dark"] .input-field-switch::before {
+  background-color: var(--theme-color-background);
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .input-field-switch {
+    border: 2px solid var(--theme-color-text);
+  }
+  
+  .input-field-switch::before {
+    border: 1px solid var(--theme-color-text);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .input-field-switch,
+  .input-field-switch::before,
+  .input-field-switch-label {
+    transition: none;
+  }
+}

@@ -236,6 +236,39 @@
   margin: 0.25rem 0;
 }
 
+#toggle-component-demo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-radius: var(--theme-radius-md);
+  border: 2px solid var(--theme-color-border);
+  background: var(--theme-color-background);
+  transition: all var(--theme-transition-normal) ease-in-out;
+}
+
+#toggle-component-demo.dark-mode {
+  background: linear-gradient(135deg, #2d3748 0%, #4a5568 100%);
+  border-color: #63b3ed;
+  color: #e2e8f0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+#toggle-component-demo label {
+  color: var(--theme-color-text);
+  font-size: 0.875rem;
+  transition: color var(--theme-transition-fast);
+}
+
+#toggle-component-demo.dark-mode label {
+  color: #e2e8f0;
+}
+
+#toggle-component-demo.dark-mode h3 {
+  color: #63b3ed;
+}
+
 @media (max-width: 768px) {
   .input-fields-demo {
     padding: 1rem;

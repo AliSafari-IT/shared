@@ -42,6 +42,14 @@ const InputFieldsDemo: React.FC = () => {
     return null;
   };
 
+  // apply darkMode to the toggle component
+  const toggleDarkMode = (checked: boolean) => {
+    const toggleElement = document.getElementById("toggle-component-demo");
+    if (toggleElement) {
+      toggleElement.classList.toggle("dark-mode", checked);
+    }
+  };
+
   const inputTypes: {
     type: InputFieldType;
     label: string;
@@ -338,6 +346,44 @@ const InputFieldsDemo: React.FC = () => {
             }
             key="isActive_checkbox"
           />
+
+          <div className="state-demo-item">
+            <h3>🔄 Switch Toggle</h3>
+            <InputFields.Switch
+              name="notifications"
+              label="Enable Notifications"
+              checked={demoValues["notifications"] === "true"}
+              onChange={(checked: boolean) =>
+                handleValueChange(checked, "notifications")
+              }
+              onLabel="Enabled"
+              offLabel="Disabled"
+              helperText="Toggle to enable/disable notifications"
+            />
+            <InputFields.Text
+              name="notificationMessage"
+              label="Notification Status"
+              readOnly={demoValues["notifications"] !== "true"}
+              value={demoValues["notifications"] || ""}              
+            />
+          </div>
+
+          <div className="state-demo-item" id="toggle-component-demo">
+            <h3>⚡ Toggle Component</h3>
+            <InputFields.Toggle
+              name="darkMode"
+              label="Dark Mode"
+              checked={demoValues["darkMode"] === "true"}
+              onChange={(checked: boolean) => {
+                handleValueChange(checked, "darkMode");
+                toggleDarkMode(checked);
+              }}
+              onLabel="Dark"
+              offLabel="Light"
+              styling={currentStyling}
+              helperText="Switch between light and dark themes"
+            />
+          </div>
         </div>
       </div>
 
@@ -555,16 +601,23 @@ const InputFieldsDemo: React.FC = () => {
           </div>
 
           <div className="usage-example">
-            <h3>With States</h3>
+            <h3>Switch & Toggle Usage</h3>
             <pre>
-              <code>{`<InputFields
-  type="password"
-  styling="minimal"
-  label="Password"
-  error={errors.password}
-  loading={isValidating}
-  success={isValid}
-  showCharacterCount={true}
+              <code>{`<InputFields.Switch
+  name="notifications"
+  label="Enable Notifications"
+  checked={isEnabled}
+  onChange={setIsEnabled}
+  onLabel="On"
+  offLabel="Off"
+/>
+
+<InputFields.Toggle
+  name="darkMode"
+  checked={isDark}
+  onChange={setIsDark}
+  onLabel="Dark"
+  offLabel="Light"
 />`}</code>
             </pre>
           </div>
