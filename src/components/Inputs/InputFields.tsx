@@ -21,13 +21,18 @@ export type InputFieldType =
   | "checkbox"
   | "radio"
   | "file"
-  | "hidden";
+  | "hidden"
+  | "color"
+  | "reset"
+  | "button"
+  | "submit";
 
-interface Option {
+// Define the option type for select inputs
+export interface Option {
   value: string;
   label: string;
 }
-
+// Define the checkbox props
 // Checkbox-specific props: use `checked` boolean and callback
 type CheckboxProps = Omit<InputFieldsProps, "value" | "onChange"> & {
   checked?: boolean;
@@ -52,10 +57,11 @@ export interface InputFieldsProps {
   placeholder?: string;
   value?: string;
   defaultValue?: string;
-  options?: Option[]; // For select type
 
   // Event handlers
   onChange?: (value: string, name?: string) => void;
+  onCheckboxChange?: (checked: boolean, name?: string) => void;
+
   onBlur?: (
     e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -103,6 +109,30 @@ export interface InputFieldsProps {
   max?: number;
   step?: number;
 
+  // Specific to select
+  options?: Option[];
+
+  // Specific to select dropdowns
+  isMulti?: boolean;
+
+  // Specific to checkbox and radio
+  // Use `checked` boolean and callback
+  checked?: boolean;
+
+  // Specific to file inputs
+  accept?: string; // File types accepted
+  multiple?: boolean; // Allow multiple files
+
+  // Specific to hidden inputs
+
+  // Specific to color inputs
+  color?: string; // Color input value
+
+  // Specific to reset and button inputs
+  reset?: boolean; // Reset button
+  button?: boolean; // Button input
+  submit?: boolean; // Submit button
+
   // Helper text
   helperText?: string;
   showCharacterCount?: boolean;
@@ -119,6 +149,8 @@ export interface InputFieldsRef {
   validate: () => boolean;
   getValue: () => string;
   setValue: (value: string) => void;
+  reset: () => void;
+    // Additional methods can be added as needed
 }
 
 // Base implementation as internal component
@@ -163,6 +195,15 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
       helperText,
       showCharacterCount = false,
       options = [],
+        isMulti = false,
+        accept,
+        multiple = false,
+        checked,
+        color,
+        reset = false,
+        button = false,
+        submit = false,
+
       ...rest
     },
     ref
@@ -170,6 +211,9 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
     const [internalValue, setInternalValue] = useState(defaultValue);
     const [internalError, setInternalError] = useState<string>("");
     const [isFocused, setIsFocused] = useState(false);
+    // Use a ref to access the input element directly
+    // This allows us to implement imperative methods like focus, blur, etc.
+
 
     const inputRef = React.useRef<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -228,7 +272,9 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
 
     // Handle blur event
     const handleBlur = (
-      e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+      e: React.FocusEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
     ) => {
       setIsFocused(false);
 
@@ -242,7 +288,9 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
 
     // Handle focus event
     const handleFocus = (
-      e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+      e: React.FocusEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
     ) => {
       setIsFocused(true);
       onFocus?.(e as React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>);
@@ -271,6 +319,12 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
         }
         onChange?.(newValue, name);
       },
+      reset: () => {
+        if (value === undefined) {
+          setInternalValue("");
+        }
+        onChange?.("", name);
+      },
     }));
 
     // Build CSS classes
@@ -286,6 +340,12 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
       loading ? "input-field-loading" : "",
       isFocused ? "input-field-focused" : "",
       icon ? `input-field-with-icon input-field-icon-${iconPosition}` : "",
+        // Add custom className if provided
+        reset ? "input-field-reset" : "",
+        button ? "input-field-button" : "",
+        submit ? "input-field-submit" : "",
+        color ? "input-field-color" : "",
+        // Combine with any additional className
       className,
     ]
       .filter(Boolean)
@@ -295,6 +355,26 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
       "input-field",
       type === "textarea" ? "input-field-textarea" : "",
       !resize && type === "textarea" ? "input-field-no-resize" : "",
+        `input-field-${styling}`,
+        isMulti ? "input-field-multi" : "",
+        accept ? "input-field-accept" : "",
+        multiple ? "input-field-multiple" : "",
+        checked ? "input-field-checked" : "",
+        color ? "input-field-color" : "",
+        `input-field-${type}`,
+        reset ? "input-field-reset" : "",
+        button ? "input-field-button" : "",
+        submit ? "input-field-submit" : "",
+        size ? `input-field-size-${size}` : "",
+        disabled ? "input-field-disabled" : "",
+        readOnly ? "input-field-readonly" : "",
+        currentError ? "input-field-error" : "",
+        success && !currentError ? "input-field-success" : "",
+        loading ? "input-field-loading" : "",
+        isFocused ? "input-field-focused" : "",
+        icon ? `input-field-with-icon input-field-icon-${iconPosition}` : "",
+        // Add custom className if provided
+        className,
     ]
       .filter(Boolean)
       .join(" ");
@@ -315,13 +395,15 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
       id: id || name,
       autoComplete,
       autoFocus,
-      placeholder,
+        style,
+        placeholder: type === "select" ? undefined : placeholder,
       "aria-invalid": !!currentError,
       "aria-describedby": currentError
         ? `${id || name}-error`
         : helperText
         ? `${id || name}-helper`
         : undefined,
+        // Additional HTML attributes
       ...rest,
     };
 
@@ -354,7 +436,11 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
             className={inputClasses}
             type={type}
             checked={isChecked}
-            onChange={(e) => handleChange({ target: { value: e.target.checked.toString() } } as any)}
+            onChange={(e) =>
+              handleChange({
+                target: { value: e.target.checked.toString() },
+              } as any)
+            }
             disabled={disabled}
             readOnly={readOnly}
             required={required}
@@ -366,7 +452,9 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
         );
       }
 
-      return (<input {...commonProps} type={type} min={min} max={max} step={step} />);
+      return (
+        <input {...commonProps} type={type} min={min} max={max} step={step} />
+      );
     };
 
     // Character count
@@ -487,7 +575,9 @@ const Checkbox = forwardRef<InputFieldsRef, CheckboxProps>(
       // feed BaseInputFields a string under the hood
       value={checked ? "true" : "false"}
       // map string back to boolean
-      onChange={(val: string, name?: string) => onChange?.(val === "true", name)}
+      onChange={(val: string, name?: string) =>
+        onChange?.(val === "true", name)
+      }
     />
   )
 );
@@ -501,6 +591,23 @@ const FileField = React.forwardRef<InputFieldsRef, InputFieldsProps>(
 const HiddenField = React.forwardRef<InputFieldsRef, InputFieldsProps>(
   (props, ref) => <BaseInputFields {...props} ref={ref} type="hidden" />
 );
+// Additional input type wrappers
+const ColorField = React.forwardRef<InputFieldsRef, InputFieldsProps>(
+  (props, ref) => <BaseInputFields {...props} ref={ref} type="color" />
+);
+ColorField.displayName = "InputFields.Color";
+const ResetField = React.forwardRef<InputFieldsRef, InputFieldsProps>(
+  (props, ref) => <BaseInputFields {...props} ref={ref} type="reset" />
+);
+ResetField.displayName = "InputFields.Reset";
+const ButtonField = React.forwardRef<InputFieldsRef, InputFieldsProps>(
+  (props, ref) => <BaseInputFields {...props} ref={ref} type="button" />
+);
+ButtonField.displayName = "InputFields.Button";
+const SubmitField = React.forwardRef<InputFieldsRef, InputFieldsProps>(
+  (props, ref) => <BaseInputFields {...props} ref={ref} type="submit" />
+);
+SubmitField.displayName = "InputFields.Submit";
 
 // Compose final exported component with static properties
 interface ExtendedInputFields
@@ -523,6 +630,10 @@ interface ExtendedInputFields
   Radio: typeof RadioField;
   File: typeof FileField;
   Hidden: typeof HiddenField;
+  Color: typeof ColorField;
+  Reset: typeof ResetField;
+  Button: typeof ButtonField;
+  Submit: typeof SubmitField;
 }
 const InputFields = BaseInputFields as ExtendedInputFields;
 InputFields.Text = Text;
@@ -541,5 +652,9 @@ InputFields.Checkbox = Checkbox;
 InputFields.Radio = RadioField;
 InputFields.File = FileField;
 InputFields.Hidden = HiddenField;
+InputFields.Color = ColorField;
+InputFields.Reset = ResetField;
+InputFields.Button = ButtonField;
+InputFields.Submit = SubmitField;
 
 export default InputFields;

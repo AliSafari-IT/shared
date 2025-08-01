@@ -11,10 +11,15 @@ const InputFieldsDemo: React.FC = () => {
   const [currentStyling, setCurrentStyling] =
     useState<InputStylingType>("default");
   const inputRef = useRef<InputFieldsRef>(null);
+  // Background highlight for submit action
+  const [submitBg, setSubmitBg] = useState(false);
 
   const handleValueChange = (value: string | boolean, name?: string) => {
     if (name) {
       setDemoValues((prev) => ({ ...prev, [name]: String(value) }));
+    }
+    else {
+      setDemoValues((prev) => ({ ...prev, value: String(value) }));
     }
   };
 
@@ -58,6 +63,10 @@ const InputFieldsDemo: React.FC = () => {
     { type: "radio", label: "Radio Button", icon: "🔘" },
     { type: "file", label: "File Upload", icon: "📁" },
     { type: "hidden", label: "Hidden Input", icon: "🔒" },
+    { type: "color", label: "Color Picker", icon: "🎨" },
+    { type: "reset", label: "Reset Button", icon: "🔄" },
+    { type: "button", label: "Button", icon: "🔘" },
+    { type: "submit", label: "Submit", icon: "✅" }    
   ];
 
   const stylingTypes: InputStylingType[] = [
@@ -88,10 +97,17 @@ const InputFieldsDemo: React.FC = () => {
     radio: InputFields.Radio,
     file: InputFields.File,
     hidden: InputFields.Hidden,
+    color: InputFields.Color,
+    reset: InputFields.Reset,
+    button: InputFields.Button,
+    submit: InputFields.Submit,
   };
 
   return (
-    <div className="input-fields-demo">
+    <div
+      className="input-fields-demo"
+      style={submitBg ? { backgroundColor: "lightblue" } : undefined}
+    >
       <div className="demo-header">
         <h1>InputFields Component Demo</h1>
         <p>
@@ -132,18 +148,18 @@ const InputFieldsDemo: React.FC = () => {
                 <SpecificInput
                   styling={currentStyling}
                   label={label}
-                placeholder={`Enter ${label.toLowerCase()}...`}
-                {...(
-                  type === "checkbox"
+                  placeholder={`Enter ${label.toLowerCase()}...`}
+                  {...(type === "checkbox"
                     ? {
                         checked: demoValues[type] === "true",
-                        onChange: (checked: boolean) => handleValueChange(checked, type),
+                        onChange: (checked: boolean) =>
+                          handleValueChange(checked, type),
                       }
                     : {
                         value: demoValues[type] || "",
-                        onChange: (value: string) => handleValueChange(value, type),
-                      }
-                )}
+                        onChange: (value: string) =>
+                          handleValueChange(value, type),
+                      })}
                   name={type}
                   helperText={`This is a ${type} input field`}
                   {...(type === "textarea" && { rows: 3 })}
@@ -157,6 +173,42 @@ const InputFieldsDemo: React.FC = () => {
                       { value: "option1", label: "Option 1" },
                       { value: "option2", label: "Option 2" },
                     ],
+                  })}
+                  {...(type === "checkbox" && {
+                    checked: demoValues[type] === "true",
+                    onChange: (checked: boolean) =>
+                      handleValueChange(checked, type),
+                  })}
+                  {...(type === "radio" && {
+                    checked: demoValues[type] === "true",
+                    onChange: (checked: boolean) =>
+                      handleValueChange(checked, type),
+                  })}
+                  {...(type === "file" && {
+                    accept: "image/*",
+                    multiple: true,
+                    onChange: (files: FileList | null) =>
+                      handleValueChange(files ? files.length.toString() : "", type),
+                  })}
+                  {...(type === "color" && {
+                    value: demoValues[type] || "",
+                    onChange: (value: string) => handleValueChange(value, type),
+                  })}
+                  {...(type === "reset" && {
+                    onClick: () => {
+                      clearAllInputs();
+                    },
+                  })}
+                  {...(type === "submit" && {
+                    onClick: () => {
+                      setSubmitBg(true);
+                      setTimeout(() => setSubmitBg(false), 3000);
+                    },
+                  })}
+                  {...(type === "button" && {
+                    onClick: () => {
+                      console.log(`Button input '${type}' clicked`);
+                    },
                   })}
                 />
               </div>
@@ -281,7 +333,9 @@ const InputFieldsDemo: React.FC = () => {
             name="isActive"
             label="Is Active?"
             checked={demoValues["isActive"] === "true"}
-            onChange={(checked: boolean) => handleValueChange(checked, "isActive")}
+            onChange={(checked: boolean) =>
+              handleValueChange(checked, "isActive")
+            }
             key="isActive_checkbox"
           />
         </div>
