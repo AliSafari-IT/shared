@@ -54,27 +54,28 @@ const InputFieldsDemo: React.FC = () => {
     type: InputFieldType;
     label: string;
     icon?: React.ReactNode;
+    iconPosition?: "left" | "right" | "only";
   }[] = [
-    { type: "text", label: "Text Input", icon: "📝" },
-    { type: "email", label: "Email Input", icon: "📧" },
-    { type: "password", label: "Password Input", icon: "🔒" },
-    { type: "number", label: "Number Input", icon: "#️⃣" },
-    { type: "range", label: "Range Slider", icon: "🎚️" },
-    { type: "tel", label: "Phone Input", icon: "📞" },
-    { type: "url", label: "URL Input", icon: "🌐" },
-    { type: "search", label: "Search Input", icon: "🔍" },
-    { type: "date", label: "Date Input", icon: "📅" },
-    { type: "time", label: "Time Input", icon: "⏰" },
-    { type: "textarea", label: "Textarea", icon: "📄" },
-    { type: "select", label: "Select Dropdown", icon: "📋" },
-    { type: "checkbox", label: "Checkbox", icon: "☑️" },
-    { type: "radio", label: "Radio Button", icon: "🔘" },
-    { type: "file", label: "File Upload", icon: "📁" },
-    { type: "hidden", label: "Hidden Input", icon: "🔒" },
-    { type: "color", label: "Color Picker", icon: "🎨" },
-    { type: "reset", label: "Reset Button", icon: "🔄" },
-    { type: "button", label: "Button", icon: "🔘" },
-    { type: "submit", label: "Submit", icon: "✅" }    
+    { type: "text", label: "Text Input", icon: "📝", iconPosition: "left" },
+    { type: "email", label: "Email Input", icon: "📧", iconPosition: "left" },
+    { type: "password", label: "Password Input", icon: "🔒", iconPosition: "left" },
+    { type: "number", label: "Number Input", icon: "#️⃣", iconPosition: "left" },
+    { type: "range", label: "Range Slider", icon: "🎚️", iconPosition: "left" },
+    { type: "tel", label: "Phone Input", icon: "📞", iconPosition: "left" },
+    { type: "url", label: "URL Input", icon: "🌐", iconPosition: "left" },
+    { type: "search", label: "Search Input", icon: "🔍", iconPosition: "left" },
+    { type: "date", label: "Date Input", icon: "📅", iconPosition: "left" },
+    { type: "time", label: "Time Input", icon: "⏰", iconPosition: "left" },
+    { type: "textarea", label: "Textarea", icon: "📄", iconPosition: "left" },
+    { type: "select", label: "Select Dropdown", icon: "📋", iconPosition: "left" },
+    { type: "checkbox", label: "Checkbox", icon: "☑️", iconPosition: "left" },
+    { type: "radio", label: "Radio Button", icon: "🔘", iconPosition: "left" },
+    { type: "file", label: "File Upload", icon: "📁", iconPosition: "right" },
+    { type: "hidden", label: "Hidden Input", icon: "🔒", iconPosition: "left" },
+    { type: "color", label: "Color Picker", icon: "🎨", iconPosition: "left" },
+    { type: "reset", label: "Reset Button", icon: "✖️", iconPosition: "only" },
+    { type: "button", label: "Button", icon: "🔘", iconPosition: "right" },
+    { type: "submit", label: "Submit", icon: "✅", iconPosition: "right" }    
   ];
 
   const stylingTypes: InputStylingType[] = [
@@ -146,7 +147,7 @@ const InputFieldsDemo: React.FC = () => {
       <div className="demo-section">
         <h2>🔧 All Input Types</h2>
         <div className="inputs-grid">
-          {inputTypes.map(({ type, label, icon }) => {
+          {inputTypes.map(({ type, label, icon, iconPosition }) => {
             const SpecificInput = inputComponents[type];
             return (
               <div key={type} className="input-demo-item">
@@ -156,6 +157,8 @@ const InputFieldsDemo: React.FC = () => {
                 <SpecificInput
                   styling={currentStyling}
                   label={label}
+                  icon={icon}
+                  iconPosition={iconPosition}
                   placeholder={`Enter ${label.toLowerCase()}...`}
                   {...(type === "checkbox"
                     ? {
@@ -218,6 +221,8 @@ const InputFieldsDemo: React.FC = () => {
                       console.log(`Button input '${type}' clicked`);
                     },
                   })}
+                  
+                  className={`${type}-input-demo`}
                 />
               </div>
             );

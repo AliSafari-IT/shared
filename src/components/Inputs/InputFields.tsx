@@ -81,10 +81,10 @@ export interface InputFieldsProps {
   loading?: boolean;
 
   // Styling props
-  size?: "sm" | "md" | "lg";
+  size?: "xs" | "sm" | "md" | "lg";
   fullWidth?: boolean;
   icon?: React.ReactNode;
-  iconPosition?: "left" | "right";
+  iconPosition?: "left" | "right" | "only";
   className?: string;
   style?: React.CSSProperties;
 
@@ -492,7 +492,8 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
       }
       // For reset, button, and submit, use a <button> to display text
       if (type === "reset" || type === "button" || type === "submit") {
-        const buttonText = label || type.charAt(0).toUpperCase() + type.slice(1);
+        const bText = label || type.charAt(0).toUpperCase() + type.slice(1);
+
         // Omit non-button-specific props
         const {
           value: _omitValue,
@@ -505,13 +506,17 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
           multiple: _omitMultiple,
           ...buttonProps
         } = commonProps as any;
+        
         return (
           <button
             {...buttonProps}
             type={type}
             className={inputClasses}
           >
-            {buttonText}
+            {icon && iconPosition === "left" && <span className="button-icon-left">{icon}</span>}
+            {iconPosition !== "only" && <span className="button-text">{bText}</span>}
+            {icon && iconPosition === "right" && <span className="button-icon-right">{icon}</span>}
+            {icon && iconPosition === "only" && <span className="button-icon-only">{icon}</span>}
           </button>
         );
       }
@@ -543,13 +548,13 @@ const BaseInputFields = forwardRef<InputFieldsRef, InputFieldsProps>(
         )}
 
         <div className="input-field-wrapper">
-          {icon && iconPosition === "left" && (
+          {icon && iconPosition === "left" && type !== "reset" && type !== "button" && type !== "submit" && (
             <div className="input-field-icon input-field-icon-left">{icon}</div>
           )}
 
           {renderInput()}
 
-          {icon && iconPosition === "right" && (
+          {icon && iconPosition === "right" && type !== "reset" && type !== "button" && type !== "submit" && (
             <div className="input-field-icon input-field-icon-right">
               {icon}
             </div>

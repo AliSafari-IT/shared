@@ -872,3 +872,220 @@
   background-color: var(--theme-color-primary-alpha);
   text-decoration: none;
 }
+
+/* Button icon styles */
+.button-icon-left,
+.button-icon-right,
+.button-icon-only {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 var(--theme-spacing-xs, 0.25rem);
+}
+
+.button-icon-left {
+  margin-right: var(--theme-spacing-sm, 0.5rem);
+}
+
+.button-icon-right {
+  margin-left: var(--theme-spacing-sm, 0.5rem);
+}
+
+.button-icon-only {
+  margin: 0;
+}
+
+.button-text {
+  display: inline-block;
+}
+
+/* Button styling for different input types */
+.input-field-reset button,
+.input-field-button button,
+.input-field-submit button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--theme-spacing-xs, 0.25rem);
+  cursor: pointer;
+  border: none;
+  border-radius: var(--theme-radius-md, 8px);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--theme-font-weight-medium, 500);
+  transition: all var(--theme-transition-normal, 200ms ease);
+  background: var(--theme-color-primary, #4dabf7);
+  color: white;
+  padding: var(--theme-spacing-sm, 0.5rem) var(--theme-spacing-md, 1rem);
+  min-height: 40px;
+}
+
+.input-field-reset button:hover,
+.input-field-button button:hover,
+.input-field-submit button:hover {
+  background: var(--theme-color-primary-hover, #339af0);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.input-field-reset button:focus,
+.input-field-button button:focus,
+.input-field-submit button:focus {
+  outline: 2px solid var(--theme-color-primary, #4dabf7);
+  outline-offset: 2px;
+}
+
+.input-field-reset button:active,
+.input-field-button button:active,
+.input-field-submit button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Submit button specific styling */
+.input-field-submit button {
+  background: var(--theme-color-success, #51cf66);
+}
+
+.input-field-submit button:hover {
+  background: var(--theme-color-success-hover, #40c057);
+}
+
+/* Reset button specific styling */
+.input-field-reset button {
+  background: var(--theme-color-secondary, #868e96);
+}
+
+.input-field-reset button:hover {
+  background: var(--theme-color-secondary-hover, #6c757d);
+}
+
+/* Disabled state */
+.input-field-disabled .input-field-reset button,
+.input-field-disabled .input-field-button button,
+.input-field-disabled .input-field-submit button {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.input-field-disabled .input-field-reset button:hover,
+.input-field-disabled .input-field-button button:hover,
+.input-field-disabled .input-field-submit button:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+/* Size variations */
+.input-field-size-sm .input-field-reset button,
+.input-field-size-sm .input-field-button button,
+.input-field-size-sm .input-field-submit button {
+  padding: var(--theme-spacing-xs, 0.25rem) var(--theme-spacing-sm, 0.5rem);
+  font-size: var(--theme-font-size-sm, 0.875rem);
+  min-height: 32px;
+}
+
+.input-field-size-lg .input-field-reset button,
+.input-field-size-lg .input-field-button button,
+.input-field-size-lg .input-field-submit button {
+  padding: var(--theme-spacing-md, 1rem) var(--theme-spacing-lg, 1.5rem);
+  font-size: var(--theme-font-size-lg, 1.125rem);
+  min-height: 48px;
+}
+
+/* Styling variations */
+.input-field-compact .input-field-reset button,
+.input-field-compact .input-field-button button,
+.input-field-compact .input-field-submit button {
+  padding: var(--theme-spacing-xs, 0.25rem) var(--theme-spacing-sm, 0.5rem);
+  border-radius: var(--theme-radius-sm, 4px);
+}
+
+.input-field-outlined .input-field-reset button,
+.input-field-outlined .input-field-button button,
+.input-field-outlined .input-field-submit button {
+  background: transparent;
+  border: 2px solid var(--theme-color-primary, #4dabf7);
+  color: var(--theme-color-primary, #4dabf7);
+}
+
+.input-field-outlined .input-field-reset button:hover,
+.input-field-outlined .input-field-button button:hover,
+.input-field-outlined .input-field-submit button:hover {
+  background: var(--theme-color-primary, #4dabf7);
+  color: white;
+}
+
+.input-field-outlined .input-field-submit button {
+  border-color: var(--theme-color-success, #51cf66);
+  color: var(--theme-color-success, #51cf66);
+}
+
+.input-field-outlined .input-field-submit button:hover {
+  background: var(--theme-color-success, #51cf66);
+  color: white;
+}
+
+.input-field-minimal .input-field-reset button,
+.input-field-minimal .input-field-button button,
+.input-field-minimal .input-field-submit button {
+  background: transparent;
+  color: var(--theme-color-primary, #4dabf7);
+  border: none;
+  box-shadow: none;
+}
+
+.input-field-minimal .input-field-reset button:hover,
+.input-field-minimal .input-field-button button:hover,
+.input-field-minimal .input-field-submit button:hover {
+  background: rgba(77, 171, 247, 0.1);
+  transform: none;
+  box-shadow: none;
+}
+
+/* Dark theme support */
+[data-theme="dark"] .input-field-reset button,
+[data-theme="dark"] .input-field-button button,
+[data-theme="dark"] .input-field-submit button {
+  background: var(--theme-color-primary, #4dabf7);
+  color: white;
+}
+
+[data-theme="dark"] .input-field-outlined .input-field-reset button,
+[data-theme="dark"] .input-field-outlined .input-field-button button,
+[data-theme="dark"] .input-field-outlined .input-field-submit button {
+  background: transparent;
+  border-color: var(--theme-color-primary, #4dabf7);
+  color: var(--theme-color-primary, #4dabf7);
+}
+
+[data-theme="dark"] .input-field-minimal .input-field-reset button,
+[data-theme="dark"] .input-field-minimal .input-field-button button,
+[data-theme="dark"] .input-field-minimal .input-field-submit button {
+  background: transparent;
+  color: var(--theme-color-primary, #4dabf7);
+}
+
+/* High contrast mode */
+@media (prefers-contrast: high) {
+  .input-field-reset button,
+  .input-field-button button,
+  .input-field-submit button {
+    border-width: 2px;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .input-field-reset button,
+  .input-field-button button,
+  .input-field-submit button {
+    transition: none;
+  }
+  
+  .input-field-reset button:hover,
+  .input-field-button button:hover,
+  .input-field-submit button:hover {
+    transform: none;
+  }
+}
