@@ -1,10 +1,5 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link,
-  useLocation,
-} from "react-router-dom";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Overview from "./components/Overview";
 import PackageLinksDemo from "./components/PackageLinksDemo";
 import ButtonComponentDemo from "./components/ButtonComponentDemo";
@@ -13,6 +8,7 @@ import DDItemsDemo from "./components/DDItemsDemo";
 import InputFieldsDemo from "./components/InputFieldsDemo";
 import HeaderComponentDemo from "./components/HeaderComponentDemo";
 import HeaderWrappersDemo from "./components/HeaderWrappersDemo";
+import AdminHeaderDemo from "./components/AdminHeaderDemo";
 import NavigationDropdown from "./components/NavigationDropdown";
 import { ThemeToggle } from "@asafarim/react-themes";
 
@@ -41,15 +37,8 @@ const SharedDemoLogo = () => (
 );
 
 function Navigation() {
-  const location = useLocation();
-
-  // Check if the current path matches the route, accounting for the basename
   const isActive = (path: string) => {
-    const currentPath = location.pathname.replace("/shared", "");
-    return (
-      currentPath === path ||
-      (path === "/" && (currentPath === "" || currentPath === "/"))
-    );
+    return window.location.pathname === path;
   };
 
   return (
@@ -127,6 +116,7 @@ function App() {
             <Route path="/input-fields" element={<InputFieldsDemo />} />
             <Route path="/header-component" element={<HeaderComponentDemo />} />
             <Route path="/header-wrappers" element={<HeaderWrappersDemo />} />
+            <Route path="/admin-header" element={<AdminHeaderDemo />} />
             {/* Add more routes as needed */}
           </Routes>
         </main>

@@ -1,5 +1,5 @@
-import React from "react";
-import "./HeaderComponent.css";
+import React from 'react';
+import './HeaderComponent.css';
 
 export type HeaderType = "default" | "compact" | "outlined" | "minimal";
 
@@ -26,7 +26,15 @@ interface HeaderComponentProps {
   centerContent?: React.ReactNode;
   onLogoClick?: () => void;
   onTitleClick?: () => void;
-  [key: string]: any;
+  // Admin-specific props
+  adminMode?: boolean;
+  totalCount?: number;
+  itemName?: string; // e.g., "Tech Stacks", "Users", "Repositories"
+  currentPage?: number;
+  totalPages?: number;
+  showPagination?: boolean;
+  actions?: React.ReactNode; // Optional action buttons or elements
+  [key: string]: any; // Allow additional props
 }
 
 const HeaderComponent: React.FC<HeaderComponentProps> = ({
@@ -52,52 +60,90 @@ const HeaderComponent: React.FC<HeaderComponentProps> = ({
   centerContent,
   onLogoClick,
   onTitleClick,
+  // Admin-specific props
+  adminMode = false,
+  totalCount,
+  itemName,
+  currentPage = 1,
+  totalPages = 1,
+  showPagination = false,
+  actions,
   ...rest
 }) => {
   const headerClasses = [
     "header-component",
     `header-component-${type}`,
     `header-component-${size}`,
-    `header-component-align-${align}`,
+    `header-component-${align}`,
     fixed && "header-component-fixed",
     transparent && "header-component-transparent",
-    `header-component-elevation-${elevation}`,
+    elevation !== "none" && `header-component-elevation-${elevation}`,
     showBorder && "header-component-border",
     showShadow && "header-component-shadow",
-    className
+    adminMode && "header-component-admin",
+    className,
   ]
     .filter(Boolean)
     .join(" ");
 
-  const customStyles: React.CSSProperties = {
+  const headerStyle: React.CSSProperties = {
     ...style,
     ...(backgroundColor && { backgroundColor }),
-    ...(textColor && { color: textColor })
+    ...(textColor && { color: textColor }),
   };
 
   return (
-    <header className={headerClasses} style={customStyles} {...rest}>
-      <div className="header-component-container">
-        {leftContent && <div className="header-component-left">{leftContent}</div>}
+    <header className={headerClasses} style={headerStyle} {...rest}>
+      <div className="header-content">
+        {/* Left Content */}
+        <div className="header-left">
+          {logo && (
+            <div className="header-logo" onClick={onLogoClick}>
+              {logo}
+            </div>
+          )}
+          {logoText && !logo && (
+            <div className="header-logo-text" onClick={onLogoClick}>
+              {logoText}
+            </div>
+          )}
+          {leftContent && <div className="header-left-content">{leftContent}</div>}
+        </div>
 
-        {(logo || logoText) && (
-          <div className="header-component-logo" onClick={onLogoClick}>
-            {logo && <span className="header-component-logo-icon">{logo}</span>}
-            {logoText && <span className="header-component-logo-text">{logoText}</span>}
-          </div>
-        )}
+        {/* Center Content */}
+        <div className="header-center">
+          {title && (
+            <h1 className="header-title" onClick={onTitleClick}>
+              {title}
+            </h1>
+          )}
+          {subtitle && <h2 className="header-subtitle">{subtitle}</h2>}
+          {centerContent && <div className="header-center-content">{centerContent}</div>}
+        </div>
 
-        {(title || subtitle) && (
-          <div className="header-component-title" onClick={onTitleClick}>
-            {title && <h1 className="header-component-title-main">{title}</h1>}
-            {subtitle && <p className="header-component-title-sub">{subtitle}</p>}
-          </div>
-        )}
-
-        {centerContent && <div className="header-component-center">{centerContent}</div>}
-        {rightContent && <div className="header-component-right">{rightContent}</div>}
-        {children}
+        {/* Right Content */}
+        <div className="header-right">
+          {rightContent && <div className="header-right-content">{rightContent}</div>}
+          {adminMode && actions && <div className="header-actions">{actions}</div>}
+        </div>
       </div>
+
+      {/* Admin Stats Section */}
+      {adminMode && (totalCount !== undefined || (showPagination && totalPages > 1)) && (
+        <div className="header-admin-stats">
+          {totalCount !== undefined && (
+            <span className="admin-stat">
+              Total {itemName}: {totalCount}
+            </span>
+          )}
+          {showPagination && totalPages > 1 && (
+            <span className="admin-stat">
+              Page {currentPage} of {totalPages}
+            </span>
+          )}
+        </div>
+      )}
+      {children}
     </header>
   );
 };

@@ -917,6 +917,55 @@ function App() {
 | className      | `string`                                | -                   | Additional CSS classes                         |
 | style          | `React.CSSProperties`                   | -                   | Inline styles                                  |
 
+### `AdminHeader`
+A specialized header component designed for admin interfaces and dashboards with built-in stats, pagination, and action buttons.
+
+#### Usage
+```tsx
+import { AdminHeader, ButtonComponent } from '@asafarim/shared';
+
+function App() {
+  return (
+    <AdminHeader
+      title="User Management"
+      subtitle="Manage all user accounts and permissions"
+      icon={
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
+        </svg>
+      }
+      totalCount={1247}
+      itemName="Users"
+      currentPage={1}
+      totalPages={5}
+      showPagination={true}
+      actions={
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <ButtonComponent size="sm" variant="primary">Add User</ButtonComponent>
+          <ButtonComponent size="sm" variant="outline">Export</ButtonComponent>
+          <ButtonComponent size="sm" variant="ghost">Settings</ButtonComponent>
+        </div>
+      }
+    />
+  );
+}
+```
+
+#### Props
+| Prop           | Type                                    | Default             | Description                                    |
+|----------------|-----------------------------------------|---------------------|------------------------------------------------|
+| title          | `string`                                | -                   | Main header title                              |
+| subtitle       | `string`                                | -                   | Optional subtitle                              |
+| icon           | `ReactNode`                             | -                   | Custom icon component                          |
+| totalCount     | `number`                                | -                   | Total number of items                          |
+| itemName       | `string`                                | -                   | Name of the item type (e.g., "Users", "Products") |
+| currentPage    | `number`                                | `1`                 | Current page number                            |
+| totalPages     | `number`                                | `1`                 | Total number of pages                          |
+| showPagination | `boolean`                               | `false`             | Show pagination information                    |
+| actions        | `ReactNode`                             | -                   | Action buttons or elements                     |
+| className      | `string`                                | -                   | Additional CSS classes                         |
+| style          | `React.CSSProperties`                   | -                   | Inline styles                                  |
+
 ---
 
 ## 🎨 Theme Integration

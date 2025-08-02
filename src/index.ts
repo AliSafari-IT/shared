@@ -10,6 +10,7 @@ export { default as DefaultPageHeader } from './components/Headers/DefaultPageHe
 export { default as HeroPageHeader } from './components/Headers/HeroPageHeader';
 export { default as CallToActionPageHeader } from './components/Headers/CallToActionPageHeader';
 export { default as FancyPageHeader } from './components/Headers/FancyPageHeader';
+export { default as AdminHeader } from './components/Headers/AdminHeader';
 
 // CSS is automatically imported with components
 // Remove CSS export to avoid Vite warnings

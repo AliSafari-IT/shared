@@ -34,7 +34,8 @@ const NavigationDropdown: React.FC<NavigationDropdownProps> = ({ isActive, class
 
   const headerLinks = [
     { path: '/header-component', label: 'HeaderComponent' },
-    { path: '/header-wrappers', label: 'HeaderWrappers' }
+    { path: '/header-wrappers', label: 'HeaderWrappers' },
+    { path: '/admin-header', label: 'AdminHeader' }
   ];
 
   const isAnyHeaderActive = headerLinks.some(link => isActive(link.path));
