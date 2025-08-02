@@ -1,6 +1,6 @@
 {
   "name": "@asafarim/shared",
-  "version": "1.6.1",
+  "version": "1.7.0",
   "description": "Shared components and utilities for ASafariM web applications",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -10,7 +10,7 @@
     "build": "rollup -c",
     "dev": " rollup -c -w",
     "demo:dev": "cd demo && pnpm dev",
-    "dd": "cd demo && pnpm dev",
+    "dd": "pnpm build && cd demo && pnpm dev",
     "demo:build": "cd demo && pnpm build",
     "demo:preview": "cd demo && pnpm preview",
     "demo:install": "cd demo && pnpm install",

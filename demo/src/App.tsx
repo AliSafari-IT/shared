@@ -11,6 +11,9 @@ import ButtonComponentDemo from "./components/ButtonComponentDemo";
 import SearchItemsDemo from "./components/SearchItemsDemo";
 import DDItemsDemo from "./components/DDItemsDemo";
 import InputFieldsDemo from "./components/InputFieldsDemo";
+import HeaderComponentDemo from "./components/HeaderComponentDemo";
+import HeaderWrappersDemo from "./components/HeaderWrappersDemo";
+import NavigationDropdown from "./components/NavigationDropdown";
 import { ThemeToggle } from "@asafarim/react-themes";
 
 // Embed the SVG directly to avoid path resolution issues
@@ -84,6 +87,7 @@ function Navigation() {
       >
         InputFields
       </Link>
+      <NavigationDropdown isActive={isActive} />
     </nav>
   );
 }
@@ -118,9 +122,11 @@ function App() {
             <Route path="/" element={<Overview />} />
             <Route path="/package-links" element={<PackageLinksDemo />} />
             <Route path="/button-component" element={<ButtonComponentDemo />} />
-            <Route path="/search-box" element={<SearchItemsDemo  />} />
+            <Route path="/search-box" element={<SearchItemsDemo />} />
             <Route path="/dropdown" element={<DDItemsDemo />} />
             <Route path="/input-fields" element={<InputFieldsDemo />} />
+            <Route path="/header-component" element={<HeaderComponentDemo />} />
+            <Route path="/header-wrappers" element={<HeaderWrappersDemo />} />
             {/* Add more routes as needed */}
           </Routes>
         </main>
