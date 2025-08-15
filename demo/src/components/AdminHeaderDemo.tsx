@@ -3,7 +3,7 @@ import { AdminHeader, HeaderComponent, ButtonComponent } from '@asafarim/shared'
 import './AdminHeaderDemo.css';
 
 const AdminHeaderDemo: React.FC = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage] = useState(1);
   const [totalPages] = useState(5);
   const [totalUsers] = useState(1247);
   const [totalProducts] = useState(89);
